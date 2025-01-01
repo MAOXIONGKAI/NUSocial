@@ -1,0 +1,46 @@
+name: Frontend CI
+
+on:
+  [push, pull_request]
+
+jobs:
+  code-linting:
+    name: Code Linting
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'latest'
+
+      - name: Install Dependencies
+        run: npm ci
+        working-directory: ./frontend
+
+      - name: Run the linter
+        run: npm run lint
+        working-directory: ./frontend
+
+  unit-testing:
+    name: Unit Testing
+    runs-on: ubuntu-latest
+    needs: code-linting
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'latest'
+
+      - name: Install Dependencies
+        run: npm ci
+        working-directory: ./frontend
+
+      - name: Run Unit Testing
+        run: npm test
+        working-directory: ./frontend
