@@ -1,13 +1,38 @@
+import {useState} from 'react'
 import './App.css'
-import Logo from "./assets/logo.png"
+import NavBar from './components/NavBar'
+import SideBar from "./components/SideBar.tsx";
+import {Box} from "@mui/material"
 
 function App() {
-  return (
-    <>
-      <img src={Logo} width={300} alt="NUSocial Logo" />
-      <h1>Hi! Welcome to NUSocial!</h1>
-    </>
-  )
+    const [searchKeyword, setSearchKeyword] = useState('')
+    const [filterConditions, setFilterConditions] = useState<string[]>([])
+    const [sortCondition, setSortCondition] = useState('')
+    const [categoryCondition, setCategoryCondition] = useState('')
+    //const [posts, setPosts] = useState([])
+
+    console.log(categoryCondition)
+
+    return (
+        <Box
+            display="flex"
+            flexDirection="column"
+            width="100%"
+            justifyContent="space-between"
+        >
+            <NavBar
+                searchKeyword={searchKeyword}
+                setSearchKeyword={setSearchKeyword}
+                filterConditions={filterConditions}
+                setFilterConditions={setFilterConditions}
+                sortCondition={sortCondition}
+                setSortCondition={setSortCondition}
+            />
+            <Box display="flex">
+                <SideBar setCategoryCondition={setCategoryCondition} />
+            </Box>
+        </Box>
+    )
 }
 
 export default App
