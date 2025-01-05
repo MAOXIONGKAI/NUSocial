@@ -9,9 +9,12 @@ function App() {
     const [filterConditions, setFilterConditions] = useState<string[]>([])
     const [sortCondition, setSortCondition] = useState('')
     const [categoryCondition, setCategoryCondition] = useState('')
+    const [sectionCondition, setSectionCondition] = useState('')
     //const [posts, setPosts] = useState([])
 
-    console.log(categoryCondition)
+    // Just for passing Linting at the moment, once the variables are
+    // actually used, should just delete immediately
+    console.log(sectionCondition, categoryCondition)
 
     return (
         <Box
@@ -29,7 +32,10 @@ function App() {
                 setSortCondition={setSortCondition}
             />
             <Box display="flex">
-                <SideBar setCategoryCondition={setCategoryCondition} />
+                <SideBar
+                    setSectionCondition={setSectionCondition}
+                    setCategoryCondition={setCategoryCondition}
+                />
             </Box>
         </Box>
     )
