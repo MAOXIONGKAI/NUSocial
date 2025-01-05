@@ -1,18 +1,18 @@
-import {MenuItem, ListItemIcon, ListItemText, Divider, SvgIconTypeMap} from '@mui/material'
-import {OverridableComponent} from '@mui/material/OverridableComponent';
+import {MenuItem, ListItemIcon, ListItemText, Divider} from '@mui/material'
+import IconMenuItemLayout from "../types/IconMenuItemLayout.tsx";
 
 type Props = {
-    text: string;
+    layout: IconMenuItemLayout
     setCategoryOption: (category: string) => void;
-    Icon: OverridableComponent<SvgIconTypeMap<{}, "svg">> & { muiName: string };
 }
 
-export default function CategoryOption({text, setCategoryOption, Icon}: Props) {
+export default function IconMenuItem({layout, setCategoryOption}: Props) {
 
     function handleClick(value: string) {
         setCategoryOption(value);
     }
 
+    const {text, Icon} = layout
     return (
         <>
             <MenuItem onClick={() => handleClick(text)}>

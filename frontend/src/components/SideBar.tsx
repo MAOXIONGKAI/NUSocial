@@ -1,5 +1,6 @@
 import Box from '@mui/material/Box'
-import CategoryMenu from "./CategoryMenu.tsx";
+import IconMenu from "./IconMenu.tsx";
+import {categoryMenuOptions} from "../data/MenuData.tsx";
 
 type Props = {
     setCategoryCondition: (condition: string) => void;
@@ -15,7 +16,9 @@ export default function SideBar({setCategoryCondition}: Props) {
                 boxShadow: '5px 0px 5px rgba(0, 0, 0, 0.1)'
             }}
         >
-            <CategoryMenu
+            <IconMenu
+                header="Category"
+                layoutList={categoryMenuOptions}
                 setCategoryCondition={setCategoryCondition}
             />
         </Box>
