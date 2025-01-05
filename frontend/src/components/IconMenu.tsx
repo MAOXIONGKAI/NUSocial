@@ -3,14 +3,14 @@ import IconMenuItemLayout from "../types/IconMenuItemLayout.tsx";
 import IconMenuItem from "./IconMenuItem.tsx";
 
 type Props = {
-    header?: string
-    setCategoryCondition: (categoryCondition: string) => void,
-    layoutList: IconMenuItemLayout[]
+    header?: string;
+    setSelectedOption: (option: string) => void;
+    layoutList: IconMenuItemLayout[];
 }
 
 export default function IconMenu({
                                      header,
-                                     setCategoryCondition,
+                                     setSelectedOption,
                                      layoutList,
                                  }: Props) {
     return (
@@ -20,7 +20,7 @@ export default function IconMenu({
                 <IconMenuItem
                     key={layout.text}
                     layout={layout}
-                    setCategoryOption={setCategoryCondition}
+                    setSelectedOption={setSelectedOption}
                 />
             ))}
         </MenuList>

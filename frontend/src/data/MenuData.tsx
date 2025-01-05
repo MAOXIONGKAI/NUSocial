@@ -1,3 +1,5 @@
+import HomeIcon from '@mui/icons-material/Home';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import StudyIcon from '@mui/icons-material/MenuBook';
 import CCAIcon from '@mui/icons-material/Diversity1';
 import CampusIcon from '@mui/icons-material/LocationCity';
@@ -6,6 +8,11 @@ import SocialIcon from '@mui/icons-material/Diversity3';
 import AdminIcon from '@mui/icons-material/Fax';
 import CareerIcon from '@mui/icons-material/Work';
 import OthersIcon from '@mui/icons-material/TipsAndUpdates';
+
+export const sectionMenuOptions = [
+    {text: "Home", Icon: HomeIcon},
+    {text: "Favorite", Icon: FavoriteIcon}
+]
 
 export const categoryMenuOptions = [
     {text: "Study", Icon: StudyIcon},

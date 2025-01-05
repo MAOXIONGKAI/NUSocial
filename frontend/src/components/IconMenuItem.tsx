@@ -2,14 +2,14 @@ import {MenuItem, ListItemIcon, ListItemText, Divider} from '@mui/material'
 import IconMenuItemLayout from "../types/IconMenuItemLayout.tsx";
 
 type Props = {
-    layout: IconMenuItemLayout
-    setCategoryOption: (category: string) => void;
+    layout: IconMenuItemLayout;
+    setSelectedOption: (option: string) => void;
 }
 
-export default function IconMenuItem({layout, setCategoryOption}: Props) {
+export default function IconMenuItem({layout, setSelectedOption}: Props) {
 
     function handleClick(value: string) {
-        setCategoryOption(value);
+        setSelectedOption(value);
     }
 
     const {text, Icon} = layout
