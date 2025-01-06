@@ -1,7 +1,12 @@
 {
   "files": [],
+  "include": ["src", "tests"],
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
-  ]
+  ],
+  "compilerOptions": {
+    "types": ["vitest/globals"],
+    "jsx": "react-jsx"
+  }
 }
