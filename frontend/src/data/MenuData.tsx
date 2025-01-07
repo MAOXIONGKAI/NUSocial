@@ -8,6 +8,10 @@ import SocialIcon from '@mui/icons-material/Diversity3';
 import AdminIcon from '@mui/icons-material/Fax';
 import CareerIcon from '@mui/icons-material/Work';
 import OthersIcon from '@mui/icons-material/TipsAndUpdates';
+import LatestIcon from '@mui/icons-material/Update';
+import OldestIcon from '@mui/icons-material/History';
+import UpvoteIcon from '@mui/icons-material/ThumbUp';
+import InteractionIcon from '@mui/icons-material/Insights';
 
 export const sectionMenuOptions = [
     {text: "Home", Icon: HomeIcon},
@@ -24,3 +28,9 @@ export const categoryMenuOptions = [
     {text: "Career", Icon: CareerIcon},
     {text: "Others", Icon: OthersIcon},
 ]
+
+export const sortMenuOptions = [
+    {text: "Latest", Icon: LatestIcon},
+    {text: "Oldest", Icon: OldestIcon},
+    {text: "Most Upvotes", Icon: UpvoteIcon},
+    {text: "Most Interactions", Icon: InteractionIcon}]

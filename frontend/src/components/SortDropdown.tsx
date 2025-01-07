@@ -1,4 +1,7 @@
-import {TextField, MenuItem} from '@mui/material'
+import {useState} from "react";
+import {IconButton, ListItemIcon, Menu, MenuItem} from '@mui/material';
+import SortIcon from '@mui/icons-material/SwapVert';
+import {sortMenuOptions} from "../data/MenuData";
 
 type Props = {
     sortCondition: string;
@@ -6,30 +9,62 @@ type Props = {
 }
 
 export default function SortDropdown({
-    sortCondition,
-    setSortCondition,
+                                         sortCondition,
+                                         setSortCondition,
                                      }: Props) {
-    const sortOptions = ["latest", "oldest", "most upvotes", "most interactions"]
+    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+    const open = Boolean(anchorEl);
 
-    function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
-        setSortCondition(e.target.value);
+    function handleClick(e: React.MouseEvent<HTMLElement>) {
+        setAnchorEl(e.currentTarget);
+    }
+
+    function handleClose() {
+        setAnchorEl(null);
+    }
+
+    function handleSelect(option: string) {
+        setSortCondition(option);
+        handleClose();
     }
 
     return (
-        <TextField
-            select
-            sx={{
-                width: "50%",
-            }}
-            size="small"
-            label="Sort by"
-            id="sort-dropdown-menu"
-            value={sortCondition}
-            onChange={handleChange}
-        >
-            {sortOptions.map(option =>
-                <MenuItem key={option} value={option}>{option}</MenuItem>
-            )}
-        </TextField>
+        <>
+            <IconButton
+                disableFocusRipple={true}
+                onClick={handleClick}
+            >
+                <SortIcon/>
+            </IconButton>
+            <Menu
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center',
+                }}
+                transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'center',
+                }}
+            >
+                {sortMenuOptions.map(option => {
+                        const {text, Icon} = option
+                        return <MenuItem
+                            key={text}
+                            value={text}
+                            selected={text === sortCondition}
+                            onClick={() => handleSelect(text)}
+                        >
+                            <ListItemIcon>
+                                <Icon/>
+                            </ListItemIcon>
+                            {text}
+                        </MenuItem>
+                    }
+                )}
+            </Menu>
+        </>
     )
 }
