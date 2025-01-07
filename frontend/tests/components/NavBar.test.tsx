@@ -31,14 +31,14 @@ describe('NavBar', () => {
     it('should render the filter condition selection dropdown when shown', () => {
         render(<NavBar {...propsMock} />)
 
-        const filterConditionDropdown = screen.getByLabelText(/filter by/i)
+        const filterConditionDropdown = screen.getByTestId("FilterAltIcon")
         expect(filterConditionDropdown).toBeInTheDocument()
     })
 
     it('should render the sort condition selection dropdown when shown', () => {
         render(<NavBar {...propsMock} />)
 
-        const sortConditionDropdown = screen.getByLabelText(/sort by/i)
+        const sortConditionDropdown = screen.getByTestId("SwapVertIcon")
         expect(sortConditionDropdown).toBeInTheDocument()
     })
 })

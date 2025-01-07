@@ -4,8 +4,8 @@ import LoginFormDialog from "./LoginFormDialog.tsx";
 export default function NewUserOptions() {
     return (
         <>
-            <SignUpFormDialog/>
             <LoginFormDialog/>
+            <SignUpFormDialog/>
         </>
     )
 }

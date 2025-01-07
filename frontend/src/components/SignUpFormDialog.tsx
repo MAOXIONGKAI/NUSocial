@@ -43,8 +43,8 @@ export default function SignUpFormDialog() {
     return (
         <>
             <Button
-                size="small"
                 variant="outlined"
+                sx={{fontSize: "16px"}}
                 onClick={handleOpen}
             >
                 Sign Up

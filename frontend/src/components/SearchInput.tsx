@@ -10,11 +10,6 @@ export default function SearchInput({
                                         searchKeyword,
                                         setSearchKeyword
                                     }: Props) {
-    // Specify the lower level style of the TextField component
-    const searchBoxSxProps = {
-        fontSize: '14px'
-    }
-
     // Specify the input prop for search input, to allow adding search icon and other styles
     const searchBoxIconProps = {
         startAdornment: (
@@ -33,8 +28,7 @@ export default function SearchInput({
             size="small"
             placeholder="Search post..."
             sx={{
-                width: "100%",
-                '& .MuiInputBase-input': searchBoxSxProps
+                width: "80%"
             }}
             value={searchKeyword}
             onChange={handleChange}

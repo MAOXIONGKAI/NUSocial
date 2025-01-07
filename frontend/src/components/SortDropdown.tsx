@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {IconButton, ListItemIcon, Menu, MenuItem} from '@mui/material';
+import {IconButton, ListItemIcon, ListSubheader, Menu, MenuItem} from '@mui/material';
 import SortIcon from '@mui/icons-material/SwapVert';
 import {sortMenuOptions} from "../data/MenuData";
 
@@ -49,6 +49,7 @@ export default function SortDropdown({
                     horizontal: 'center',
                 }}
             >
+                <ListSubheader>Sort by</ListSubheader>
                 {sortMenuOptions.map(option => {
                         const {text, Icon} = option
                         return <MenuItem

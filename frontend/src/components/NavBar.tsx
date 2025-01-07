@@ -27,12 +27,12 @@ export default function NavBar({
                 position="static"
                 sx={{
                     width: "100%",
-                    padding: "10px",
+                    padding: "10px 0px",
                     backgroundColor: "white"
                 }}
             >
                 <Box display="flex">
-                    <Logo style={{width: "75px", marginRight: "15px"}}/>
+                    <Logo style={{width: "75px", margin: "0% 7.5% 0% 2.5%"}}/>
                     <SearchBar
                         searchKeyword={searchKeyword}
                         setSearchKeyword={setSearchKeyword}
@@ -46,7 +46,8 @@ export default function NavBar({
                             display: "flex",
                             gap: 2,
                             marginLeft: "auto",
-                            marginRight: "auto"
+                            marginRight: "auto",
+                            alignItems: "center"
                         }}>
                         <NewUserOptions/>
                     </Box>

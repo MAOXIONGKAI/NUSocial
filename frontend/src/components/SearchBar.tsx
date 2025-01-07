@@ -16,14 +16,16 @@ export default function SearchBar(props: Props) {
     return (
         <Box
             display="flex"
-            width="70%"
-            justifyContent="space-between"
+            width="60%"
+            justifyContent="center"
             alignItems="center"
-            gap="2%"
+            gap="30px"
         >
             <SearchInput {...props} />
-            <FilterDropdown {...props} />
-            <SortDropdown {...props}/>
+            <Box display="flex" marginRight="auto" gap="10px">
+                <FilterDropdown {...props} />
+                <SortDropdown {...props}/>
+            </Box>
         </Box>
     )
 }

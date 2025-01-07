@@ -34,3 +34,6 @@ export const sortMenuOptions = [
     {text: "Oldest", Icon: OldestIcon},
     {text: "Most Upvotes", Icon: UpvoteIcon},
     {text: "Most Interactions", Icon: InteractionIcon}]
+
+export const filterTags = ["Discussion", "Guide", "Asking for Help", "Question",
+    "Rant", "Meme", "Emergency", "Others"]

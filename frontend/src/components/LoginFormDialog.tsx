@@ -41,7 +41,13 @@ export default function LoginFormDialog() {
 
     return (
         <>
-            <Button size="small" variant="outlined" onClick={handleOpen}>Login</Button>
+            <Button
+                variant="outlined"
+                sx={{fontSize: "16px"}}
+                onClick={handleOpen}
+            >
+                Login
+            </Button>
             <Dialog
                 open={open}
                 onClose={handleClose}
