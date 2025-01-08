@@ -19,7 +19,7 @@ import ReportIssueIcon from '@mui/icons-material/BugReport';
 import LogoutIcon from '@mui/icons-material/Logout';
 
 export default function ProfileMenu() {
-    const [user, _] = useContext(UserContext);
+    const [user] = useContext(UserContext);
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
 

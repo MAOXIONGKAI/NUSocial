@@ -24,7 +24,7 @@ export default function NavBar({
                                    sortCondition,
                                    setSortCondition
                                }: Props) {
-    const [user, _] = useContext(UserContext)
+    const [user] = useContext(UserContext)
     const loggedIn = user !== null
     return (
         <>

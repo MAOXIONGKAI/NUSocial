@@ -22,7 +22,7 @@ function TestingComponent1() {
 }
 
 function TestingComponent2() {
-    const [user, _] = useContext(UserContext);
+    const [user] = useContext(UserContext);
     return <h2>User is {user?.username}</h2>
 }
 
