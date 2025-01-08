@@ -1,5 +1,6 @@
 import {useContext} from "react";
-import {UserProvider, UserContext} from "../../src/contexts/UserProvider";
+import {UserContext} from "../../src/contexts/UserContext.tsx";
+import {UserProvider} from "../../src/context-providers/UserProvider.tsx";
 import {render, screen} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 

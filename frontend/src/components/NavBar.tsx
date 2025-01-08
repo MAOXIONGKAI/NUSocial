@@ -1,5 +1,5 @@
 import {useContext} from "react";
-import {UserContext} from "../contexts/UserProvider";
+import {UserContext} from "../contexts/UserContext.tsx";
 import AppBar from '@mui/material/AppBar'
 import Logo from "./Logo.tsx";
 import SearchBar from "./SearchBar.tsx";

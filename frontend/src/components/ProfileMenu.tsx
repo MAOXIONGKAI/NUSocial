@@ -1,5 +1,5 @@
 import {useState, useContext} from "react";
-import {UserContext} from "../contexts/UserProvider";
+import {UserContext} from "../contexts/UserContext.tsx";
 import {
     IconButton,
     ListItemIcon,
