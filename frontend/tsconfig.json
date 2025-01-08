@@ -1,7 +1,13 @@
 {
   "files": [],
+  "include": ["src", "tests"],
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
-  ]
+  ],
+  "compilerOptions": {
+    "lib": [ "es2015" ],
+    "types": ["vitest/globals"],
+    "jsx": "react-jsx"
+  }
 }
