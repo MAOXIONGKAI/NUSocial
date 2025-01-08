@@ -1,4 +1,5 @@
-import {useState} from "react";
+import {useState, useContext} from "react";
+import {UserContext} from "../contexts/UserProvider";
 import {
     IconButton,
     ListItemIcon,
@@ -18,6 +19,7 @@ import ReportIssueIcon from '@mui/icons-material/BugReport';
 import LogoutIcon from '@mui/icons-material/Logout';
 
 export default function ProfileMenu() {
+    const [user, _] = useContext(UserContext);
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
 
@@ -56,7 +58,7 @@ export default function ProfileMenu() {
                         padding: "10px"
                     }}>
                         <Avatar sx={{width: "64px", height: "64px"}}></Avatar>
-                        <Typography>Welcome, Username!</Typography>
+                        <Typography>Welcome, {user?.username}!</Typography>
                     </Box>
                 </ListSubheader>
                 <Divider/>
