@@ -13,14 +13,12 @@ import {
 import ErrorMessage from "./ErrorMessage.tsx";
 import {passwordNotMatchError, userAlreadyExistsError} from "../data/ErrorMessages.ts";
 import useRegisterStatus from "../hooks/useRegisterStatus.ts";
+import {signUpFormDefaultData} from "../data/defaultFormData.ts";
+import hasEmptyField from "../utils/hasEmptyField.ts";
 
 export default function SignUpFormDialog() {
     const [open, setOpen] = useState(false);
-    const [formData, setFormData] = useState<SignUpFormData>({
-        username: '',
-        password: '',
-        confirmPassword: ''
-    })
+    const [formData, setFormData] = useState<SignUpFormData>(signUpFormDefaultData)
     const passwordNotMatch = formData.password !== formData.confirmPassword
     const userAlreadyExist = useRegisterStatus(formData.username)
 
@@ -42,7 +40,7 @@ export default function SignUpFormDialog() {
     }
 
     function handleSubmit(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-        if (passwordNotMatch || userAlreadyExist) {
+        if (passwordNotMatch || userAlreadyExist || hasEmptyField(formData)) {
             return
         }
         e.preventDefault();

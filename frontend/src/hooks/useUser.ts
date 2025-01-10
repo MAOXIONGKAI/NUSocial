@@ -2,19 +2,12 @@ import {useState, useEffect} from "react";
 import axios, {AxiosError, AxiosResponse} from "axios";
 import User from "../types/User.ts";
 
-type ReturnType = {
-    user: User | null;
-    error: string | null
-}
-
-export default function useUser(username: string): ReturnType {
+export default function useUser(username: string): User | null {
     const [user, setUser] = useState<User | null>(null);
-    const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         if (!username.trim()) {
             setUser(null)
-            setError(null)
             return;
         }
 
@@ -23,13 +16,11 @@ export default function useUser(username: string): ReturnType {
             .then((res: AxiosResponse) => {
                 if (!ignore) {
                     setUser(res.data)
-                    setError(null)
                 }
             })
             .catch((err: AxiosError) => {
                 if (err.name !== "CanceledError") {
                     setUser(null)
-                    setError("Failed to retrieve user data: " + err.response?.data)
                 }
             })
         return () => {
@@ -37,5 +28,5 @@ export default function useUser(username: string): ReturnType {
         }
     }, [username]);
 
-    return {user, error};
+    return user;
 }
