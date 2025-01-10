@@ -14,8 +14,10 @@ import {UserContext} from "../contexts/UserContext.tsx";
 import ErrorMessage from "./ErrorMessage.tsx";
 import {incorrectPasswordError, userDoesNotExistError} from "../data/ErrorMessages.ts";
 import User from "../types/User.ts";
-import {loginFormDefaultData} from "../data/defaultFormData.ts";
+import {loginFormDefaultData} from "../data/DefaultFormData.ts";
 import hasEmptyField from "../utils/hasEmptyField.ts";
+import useSnackBar from "../hooks/useSnackBar.ts";
+import {successfulLogin} from "../data/SnackBarConfigs.ts";
 
 export default function LoginFormDialog() {
     const [open, setOpen] = useState(false);
@@ -23,6 +25,7 @@ export default function LoginFormDialog() {
     const [formData, setFormData] = useState<LoginFormData>(loginFormDefaultData)
     const [userDoesNotExist, setUserDoesNotExist] = useState(false);
     const [isIncorrectPassword, setIsIncorrectPassword] = useState(false);
+    const successfulLoginSnackBar = useSnackBar(successfulLogin)
 
     function handleOpen() {
         setOpen(true);
@@ -56,6 +59,7 @@ export default function LoginFormDialog() {
                     return
                 }
                 setUser(user)
+                successfulLoginSnackBar()
             })
             .catch((err: AxiosError) => {
                 if (err.status === 404) {
