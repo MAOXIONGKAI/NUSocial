@@ -7,7 +7,7 @@ export const userAlreadyExistsError
 
 // Login Form Error Messages
 export const userDoesNotExistError
-    = "User doesn't exists, please check your username"
+    = "User doesn't exist, please check your username"
 
 export const incorrectPasswordError
     = "Given password is incorrect, please try again"
