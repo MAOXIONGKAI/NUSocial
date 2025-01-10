@@ -8,6 +8,8 @@ import (
 func GetRoutes(r *gin.Engine) {
 	api := r.Group("/api")
 	{
+		api.GET("/users", users.GetAllUsers)
 		api.GET("/users/:username", users.GetUser)
+		api.POST("/users", users.CreateUser)
 	}
 }

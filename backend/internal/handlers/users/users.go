@@ -23,3 +23,18 @@ func GetUser(c *gin.Context) {
 	}
 	c.IndentedJSON(http.StatusNotFound, gin.H{"message": fmt.Sprintf("%s not found", username)})
 }
+
+func GetAllUsers(c *gin.Context) {
+	c.IndentedJSON(http.StatusOK, userList)
+}
+
+func CreateUser(c *gin.Context) {
+	var newUser models.User
+
+	if err := c.BindJSON(&newUser); err != nil {
+		c.IndentedJSON(http.StatusBadRequest, gin.H{"message": err.Error()})
+	}
+
+	userList = append(userList, newUser)
+	c.IndentedJSON(http.StatusCreated, newUser)
+}
