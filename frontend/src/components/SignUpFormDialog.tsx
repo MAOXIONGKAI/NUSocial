@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useContext, useState} from 'react';
 import axios, {AxiosError, AxiosResponse} from 'axios';
 import SignUpFormData from "../types/SignUpFormData.ts";
 import {
@@ -17,12 +17,14 @@ import {signUpFormDefaultData} from "../data/DefaultFormData.ts";
 import hasEmptyField from "../utils/hasEmptyField.ts";
 import useSnackBar from "../hooks/useSnackBar.ts";
 import {successfulSignUp} from "../data/SnackBarConfigs.ts";
+import {UserContext} from "../contexts/UserContext.tsx";
 
 export default function SignUpFormDialog() {
     const [open, setOpen] = useState(false);
     const [formData, setFormData] = useState<SignUpFormData>(signUpFormDefaultData)
     const passwordNotMatch = formData.password !== formData.confirmPassword
     const userAlreadyExist = useRegisterStatus(formData.username)
+    const [, setUser] = useContext(UserContext)
     const showSuccessSignUpMessage = useSnackBar(successfulSignUp)
 
     function handleOpen() {
@@ -50,7 +52,7 @@ export default function SignUpFormDialog() {
         const {confirmPassword, ...newUser} = formData
         axios.post("http://localhost:8080/api/users", newUser)
             .then((res: AxiosResponse) => {
-                console.log(res.data)
+                setUser(res.data)
                 showSuccessSignUpMessage()
                 handleClose()
             })
