@@ -1,15 +1,18 @@
 package routes
 
 import (
+	"backend/internal/handlers"
 	"backend/internal/handlers/users"
+	"database/sql"
 	"github.com/gin-gonic/gin"
 )
 
-func GetRoutes(r *gin.Engine) {
+// GetRoutes Define routes between the given router and database
+func GetRoutes(r *gin.Engine, db *sql.DB) {
 	api := r.Group("/api")
 	{
-		api.GET("/users", users.GetAllUsers)
-		api.GET("/users/:username", users.GetUser)
-		api.POST("/users", users.CreateUser)
+		api.GET("/users", handlers.MakeHandler(users.GetAllUsers, db))
+		api.GET("/users/:username", handlers.MakeHandler(users.GetUser, db))
+		api.POST("/users", handlers.MakeHandler(users.CreateUser, db))
 	}
 }
