@@ -1,8 +1,11 @@
+import {useContext} from "react";
+import {UserContext} from "../contexts/UserContext.tsx";
 import AppBar from '@mui/material/AppBar'
 import Logo from "./Logo.tsx";
 import SearchBar from "./SearchBar.tsx";
 import {Box} from '@mui/material'
 import NewUserOptions from "./NewUserOptions.tsx";
+import LoggedInUserOptions from './LoggedInUserOptions'
 
 type Props = {
     searchKeyword: string;
@@ -21,6 +24,8 @@ export default function NavBar({
                                    sortCondition,
                                    setSortCondition
                                }: Props) {
+    const [user] = useContext(UserContext)
+    const loggedIn = user !== null
     return (
         <>
             <AppBar
@@ -49,7 +54,7 @@ export default function NavBar({
                             marginRight: "auto",
                             alignItems: "center"
                         }}>
-                        <NewUserOptions/>
+                        {loggedIn ? <LoggedInUserOptions/> : <NewUserOptions/> }
                     </Box>
                 </Box>
             </AppBar>

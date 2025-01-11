@@ -1,0 +1,28 @@
+name: Backend CI
+
+on:
+  [push, pull_request]
+
+permissions:
+  contents: read
+
+jobs:
+  code-linting:
+    name: Code Linting
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Out Code
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: stable
+
+      - name: Install golangci-lint
+        run: go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+        working-directory: ./backend
+
+      - name: Run golangci-lint
+        run: golangci-lint run
+        working-directory: ./backend

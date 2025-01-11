@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import axios, {AxiosError, AxiosResponse} from 'axios';
 import SignUpFormData from "../types/SignUpFormData.ts";
 import {
     Button,
@@ -9,14 +10,20 @@ import {
     DialogContent,
     DialogActions
 } from '@mui/material';
+import ErrorMessage from "./ErrorMessage.tsx";
+import {passwordNotMatchError, userAlreadyExistsError} from "../data/ErrorMessages.ts";
+import useRegisterStatus from "../hooks/useRegisterStatus.ts";
+import {signUpFormDefaultData} from "../data/DefaultFormData.ts";
+import hasEmptyField from "../utils/hasEmptyField.ts";
+import useSnackBar from "../hooks/useSnackBar.ts";
+import {successfulSignUp} from "../data/SnackBarConfigs.ts";
 
 export default function SignUpFormDialog() {
     const [open, setOpen] = useState(false);
-    const [formData, setFormData] = useState<SignUpFormData>({
-        username: '',
-        password: '',
-        confirmPassword: ''
-    })
+    const [formData, setFormData] = useState<SignUpFormData>(signUpFormDefaultData)
+    const passwordNotMatch = formData.password !== formData.confirmPassword
+    const userAlreadyExist = useRegisterStatus(formData.username)
+    const showSuccessSignUpMessage = useSnackBar(successfulSignUp)
 
     function handleOpen() {
         setOpen(true);
@@ -36,8 +43,18 @@ export default function SignUpFormDialog() {
     }
 
     function handleSubmit(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+        if (passwordNotMatch || userAlreadyExist || hasEmptyField(formData)) {
+            return
+        }
         e.preventDefault();
-        console.log("Form submitted");
+        const {confirmPassword, ...newUser} = formData
+        axios.post("http://localhost:8080/api/users", newUser)
+            .then((res: AxiosResponse) => {
+                console.log(res.data)
+                showSuccessSignUpMessage()
+                handleClose()
+            })
+            .catch((err: AxiosError) => console.log(err.response?.data))
     }
 
     return (
@@ -56,28 +73,35 @@ export default function SignUpFormDialog() {
             >
                 <DialogTitle textAlign="center">Sign Up</DialogTitle>
                 <DialogContent>
-                    <Box display="flex" flexDirection="column" gap={2}>
-                    <TextField
-                        label="Username"
-                        name="username"
-                        value={formData.username}
-                        onChange={handleChange}
-                    />
-                    <TextField
-                        label="Password"
-                        name="password"
-                        type="password"
-                        value={formData.password}
-                        onChange={handleChange}
-                    />
-                    <TextField
-                        label="Confirm Password"
-                        name="confirmPassword"
-                        type="password"
-                        value={formData.confirmPassword}
-                        onChange={handleChange}
-                    />
+                    <Box sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: 2,
+                        margin: "20px 0px"
+                    }}>
+                        <TextField
+                            label="Username"
+                            name="username"
+                            value={formData.username}
+                            onChange={handleChange}
+                        />
+                        <TextField
+                            label="Password"
+                            name="password"
+                            type="password"
+                            value={formData.password}
+                            onChange={handleChange}
+                        />
+                        <TextField
+                            label="Confirm Password"
+                            name="confirmPassword"
+                            type="password"
+                            value={formData.confirmPassword}
+                            onChange={handleChange}
+                        />
                     </Box>
+                    {userAlreadyExist && <ErrorMessage message={userAlreadyExistsError}/>}
+                    {passwordNotMatch && <ErrorMessage message={passwordNotMatchError}/>}
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
