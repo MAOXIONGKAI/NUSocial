@@ -16,7 +16,7 @@ import ProfileIcon from '@mui/icons-material/Person';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import NightModeIcon from '@mui/icons-material/Brightness4';
 import ReportIssueIcon from '@mui/icons-material/BugReport';
-import LogoutIcon from '@mui/icons-material/Logout';
+import LogOutButton from "./LogOutButton.tsx";
 
 export default function ProfileMenu() {
     const [user] = useContext(UserContext);
@@ -78,10 +78,7 @@ export default function ProfileMenu() {
                     <ListItemIcon><ReportIssueIcon/></ListItemIcon>
                     Report Issue
                 </MenuItem>
-                <MenuItem>
-                    <ListItemIcon><LogoutIcon/></ListItemIcon>
-                    Log Out
-                </MenuItem>
+                <LogOutButton />
             </Menu>
         </>
     )

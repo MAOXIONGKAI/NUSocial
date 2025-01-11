@@ -11,3 +11,9 @@ export const successfulSignUp: SnackBarConfig = {
     severity: 'success',
     message: "Welcome! You have successfully signed up a new account",
 }
+
+export const successfulLogOut: SnackBarConfig = {
+    open: true,
+    severity: 'success',
+    message: "You have successfully logged out",
+}
