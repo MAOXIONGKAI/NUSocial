@@ -1,7 +1,7 @@
-import {createContext, Dispatch, SetStateAction} from "react";
+import {createContext} from "react";
 import User from '../types/User'
 
-type UserContextType = [User | null, Dispatch<SetStateAction<User | null>>];
+type UserContextType = [User | null, (user: User | null) => void];
 
 export const UserContext =
     createContext<UserContextType>([null, () => {}])
