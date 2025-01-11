@@ -1,6 +1,7 @@
 package main
 
 import (
+	"backend/internal/database"
 	"backend/internal/router"
 	"fmt"
 	"log"
@@ -9,6 +10,8 @@ import (
 const port = 8080
 
 func main() {
-	r := router.Setup()
+	db := database.ConnectDB()
+	defer database.DisconnectDB(db)
+	r := router.Setup(db)
 	log.Fatal(r.Run(fmt.Sprintf(":%d", port)))
 }
