@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useContext, useState} from 'react'
 import {
     Dialog,
     DialogActions,
@@ -16,9 +16,15 @@ import {
 import AddPostIcon from '@mui/icons-material/AddBox';
 import PostCreationFormData from "../types/PostCreationFormData";
 import {categoryMenuOptions, filterTags} from "../data/MenuData";
+import {UserContext} from "../contexts/UserContext.tsx";
+import axios, {AxiosError, AxiosResponse} from "axios";
+import useSnackBar from "../hooks/useSnackBar.ts";
+import {successfulPostCreation} from "../data/SnackBarConfigs.ts";
 
 export default function PostCreationDialog() {
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(false)
+    const [user,] = useContext(UserContext)
+    const showSuccessfulPostCreation = useSnackBar(successfulPostCreation)
     const [formData, setFormData] = useState<PostCreationFormData>({
         title: "",
         category: "",
@@ -44,9 +50,30 @@ export default function PostCreationDialog() {
         }));
     }
 
+    const handleTagChange = (_event: React.ChangeEvent<object>, newTags: string[]) => {
+        setFormData(prevData => {
+            return {
+                ...prevData,
+                tags: newTags
+            }
+        });
+    };
+
     function handleSubmit() {
-        console.log("Post Creation Form Submitted")
-        handleClose()
+        const newPost = {
+            ...formData,
+            author: user?.username,
+            upvotes: [],
+            downvotes: [],
+            comments: []
+        }
+        axios.post("http://localhost:8080/api/posts", newPost)
+            .then((_res: AxiosResponse) => {
+                showSuccessfulPostCreation()
+                handleClose()
+            })
+            .catch((err: AxiosError) => console.log(err.response?.data))
+
     }
 
     return (
@@ -102,6 +129,8 @@ export default function PostCreationDialog() {
                                 disableCloseOnSelect
                                 options={filterTags}
                                 sx={{width: "80%"}}
+                                value={formData.tags}
+                                onChange={handleTagChange}
                                 renderInput={(params) =>
                                     <TextField
                                         {...params}

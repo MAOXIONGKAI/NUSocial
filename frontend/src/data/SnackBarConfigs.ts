@@ -17,3 +17,9 @@ export const successfulLogOut: SnackBarConfig = {
     severity: 'success',
     message: "You have successfully logged out",
 }
+
+export const successfulPostCreation: SnackBarConfig = {
+    open: true,
+    severity: "success",
+    message: "You have successfully created a new post"
+}

@@ -33,7 +33,8 @@ export default function NavBar({
                 sx={{
                     width: "100%",
                     padding: "10px 0px",
-                    backgroundColor: "white"
+                    backgroundColor: "white",
+                    boxShadow: 0
                 }}
             >
                 <Box display="flex">
