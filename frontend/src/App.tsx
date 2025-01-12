@@ -3,6 +3,8 @@ import './App.css'
 import NavBar from './components/NavBar'
 import SideBar from "./components/SideBar.tsx";
 import {Box} from "@mui/material"
+import ContentSection from "./components/ContentSection.tsx";
+import {post1, post2} from "./data/ManualTestData.tsx";
 
 function App() {
     const [searchKeyword, setSearchKeyword] = useState('')
@@ -10,7 +12,7 @@ function App() {
     const [sortCondition, setSortCondition] = useState('')
     const [categoryCondition, setCategoryCondition] = useState('')
     const [sectionCondition, setSectionCondition] = useState('')
-    //const [posts, setPosts] = useState([])
+    const [posts,] = useState([post1, post2])
 
     // Just for passing Linting at the moment, once the variables are
     // actually used, should just delete immediately
@@ -36,6 +38,7 @@ function App() {
                     setSectionCondition={setSectionCondition}
                     setCategoryCondition={setCategoryCondition}
                 />
+                <ContentSection posts={posts}/>
             </Box>
         </Box>
     )

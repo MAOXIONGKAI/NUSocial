@@ -14,7 +14,7 @@ export default function SideBar({setSectionCondition, setCategoryCondition}: Pro
             flexDirection="column"
             style={{
                 height: '100%',
-                boxShadow: '5px 0px 5px rgba(0, 0, 0, 0.1)'
+                border: 'LightGray solid 1px'
             }}
         >
             <IconMenu
