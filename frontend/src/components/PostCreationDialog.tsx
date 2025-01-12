@@ -50,7 +50,7 @@ export default function PostCreationDialog() {
         }));
     }
 
-    const handleTagChange = (_event: React.ChangeEvent<{}>, newTags: string[]) => {
+    const handleTagChange = (_event: React.ChangeEvent<object>, newTags: string[]) => {
         setFormData(prevData => {
             return {
                 ...prevData,
