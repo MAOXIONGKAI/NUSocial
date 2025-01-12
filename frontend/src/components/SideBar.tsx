@@ -13,7 +13,7 @@ export default function SideBar({setSectionCondition, setCategoryCondition}: Pro
             display="flex"
             flexDirection="column"
             style={{
-                height: '100%',
+                height: "calc(100vh - 68px)",
                 border: 'LightGray solid 1px'
             }}
         >
