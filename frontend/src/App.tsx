@@ -7,6 +7,7 @@ import ContentSection from "./components/ContentSection.tsx";
 import usePosts from "./hooks/usePosts.ts";
 import Post from "./types/Post.ts";
 import implementSort from "./utils/implementSort.ts";
+import makeFilterPredicate from "./utils/makeFilterPredicate.ts";
 
 function App() {
     const [searchKeyword, setSearchKeyword] = useState('')
@@ -16,8 +17,10 @@ function App() {
     const [sectionCondition, setSectionCondition] = useState('')
     const posts: Post[] = usePosts()
 
+    let filteredPosts: Post[] = []
     if (posts !== undefined) {
-        posts.sort(implementSort(sortCondition))
+        filteredPosts = posts.filter(makeFilterPredicate(filterConditions))
+        filteredPosts.sort(implementSort(sortCondition))
     }
 
     // Just for passing Linting at the moment, once the variables are
@@ -44,7 +47,7 @@ function App() {
                     setSectionCondition={setSectionCondition}
                     setCategoryCondition={setCategoryCondition}
                 />
-                <ContentSection posts={posts}/>
+                <ContentSection posts={filteredPosts}/>
             </Box>
         </Box>
     )
