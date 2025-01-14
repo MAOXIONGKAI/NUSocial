@@ -8,8 +8,6 @@ import NewUserOptions from "./NewUserOptions.tsx";
 import LoggedInUserOptions from './LoggedInUserOptions'
 
 type Props = {
-    searchKeyword: string;
-    setSearchKeyword: (searchKeyword: string) => void;
     filterConditions: string[];
     setFilterConditions: (filterConditions: string[]) => void;
     sortCondition: string;
@@ -17,8 +15,6 @@ type Props = {
 }
 
 export default function NavBar({
-                                   searchKeyword,
-                                   setSearchKeyword,
                                    filterConditions,
                                    setFilterConditions,
                                    sortCondition,
@@ -40,8 +36,6 @@ export default function NavBar({
                 <Box display="flex">
                     <Logo style={{width: "75px", margin: "0% 7.5% 0% 2.5%"}}/>
                     <SearchBar
-                        searchKeyword={searchKeyword}
-                        setSearchKeyword={setSearchKeyword}
                         filterConditions={filterConditions}
                         setFilterConditions={setFilterConditions}
                         sortCondition={sortCondition}

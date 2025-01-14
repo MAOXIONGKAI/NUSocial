@@ -10,7 +10,6 @@ import implementSort from "./utils/implementSort.ts";
 import makeFilterPredicate from "./utils/makeFilterPredicate.ts";
 
 function App() {
-    const [searchKeyword, setSearchKeyword] = useState('')
     const [filterConditions, setFilterConditions] = useState<string[]>([])
     const [sortCondition, setSortCondition] = useState('Latest')
     const [categoryCondition, setCategoryCondition] = useState('')
@@ -35,8 +34,6 @@ function App() {
             justifyContent="space-between"
         >
             <NavBar
-                searchKeyword={searchKeyword}
-                setSearchKeyword={setSearchKeyword}
                 filterConditions={filterConditions}
                 setFilterConditions={setFilterConditions}
                 sortCondition={sortCondition}

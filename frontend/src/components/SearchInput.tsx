@@ -1,15 +1,14 @@
+import {useState} from "react";
 import {TextField, InputAdornment} from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search';
 
 type Props = {
-    searchKeyword: string;
-    setSearchKeyword: (text: string) => void;
+
 }
 
-export default function SearchInput({
-                                        searchKeyword,
-                                        setSearchKeyword
-                                    }: Props) {
+export default function SearchInput({}: Props) {
+    const [searchKeyword, setSearchKeyword] = useState('')
+
     // Specify the input prop for search input, to allow adding search icon and other styles
     const searchBoxIconProps = {
         startAdornment: (

@@ -4,8 +4,6 @@ import FilterDropdown from "./FilterDropdown";
 import SortDropdown from "./SortDropdown.tsx";
 
 type Props = {
-    searchKeyword: string;
-    setSearchKeyword: (searchKeyword: string) => void;
     filterConditions: string[];
     setFilterConditions: (filterConditions: string[]) => void;
     sortCondition: string;
@@ -21,7 +19,7 @@ export default function SearchBar(props: Props) {
             alignItems="center"
             gap="30px"
         >
-            <SearchInput {...props} />
+            <SearchInput />
             <Box display="flex" marginRight="auto" gap="10px">
                 <FilterDropdown {...props} />
                 <SortDropdown {...props}/>
