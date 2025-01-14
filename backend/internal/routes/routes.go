@@ -16,7 +16,7 @@ func GetRoutes(r *gin.Engine, db *sql.DB) {
 		api.GET("/users/:username", handlers.MakeHandler(users.GetUser, db))
 		api.POST("/users", handlers.MakeHandler(users.CreateUser, db))
 
-		api.GET("/posts", handlers.MakeHandler(posts.GetAllPosts, db))
+		api.POST("/posts/search", handlers.MakeHandler(posts.SearchPosts, db))
 		api.POST("/posts", handlers.MakeHandler(posts.CreatePost, db))
 	}
 }

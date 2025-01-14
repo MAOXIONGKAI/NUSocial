@@ -3,14 +3,38 @@ package posts
 import (
 	"backend/internal/models"
 	"database/sql"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
 )
 
-func GetAllPosts(db *sql.DB, c *gin.Context) {
+type PostQuery struct {
+	Category      string `json:"category"`
+	SearchKeyword string `json:"search_keyword"`
+}
+
+func SearchPosts(db *sql.DB, c *gin.Context) {
 	var posts []models.Post
-	rows, err := db.Query("SELECT * FROM posts")
+	var requestBody PostQuery
+	if err := c.BindJSON(&requestBody); err != nil {
+		c.IndentedJSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+	}
+
+	var rows *sql.Rows
+	var err error
+	if requestBody.Category != "" && requestBody.SearchKeyword == "" {
+		rows, err = db.Query("SELECT * FROM posts WHERE category=$1", requestBody.Category)
+	} else if requestBody.Category == "" && requestBody.SearchKeyword != "" {
+		rows, err = db.Query("SELECT * FROM posts WHERE title ~* $1 OR body ~* $2",
+			requestBody.SearchKeyword, requestBody.SearchKeyword)
+	} else if requestBody.Category != "" && requestBody.SearchKeyword != "" {
+		rows, err = db.Query("SELECT * FROM posts WHERE category=$1 AND (title ~* $2 OR body ~* $3)",
+			requestBody.Category, requestBody.SearchKeyword, requestBody.SearchKeyword)
+	} else {
+		rows, err = db.Query("SELECT * FROM posts")
+	}
+	fmt.Println(requestBody)
 	if err != nil {
 		c.IndentedJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return

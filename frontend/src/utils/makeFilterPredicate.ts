@@ -7,9 +7,9 @@ export default function makeFilterPredicate(tags: string[]): PostPredicate {
         if (tags.length === 0) {
             return true
         }
-        const tagsInLowerCase = tags.map(tag => tag.toLowerCase())
+
         for (const tag of post.tags) {
-            if (tagsInLowerCase.indexOf(tag) !== -1) {
+            if (tags.indexOf(tag) !== -1) {
                 return true
             }
         }

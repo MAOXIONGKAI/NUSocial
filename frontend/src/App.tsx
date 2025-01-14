@@ -8,13 +8,16 @@ import usePosts from "./hooks/usePosts.ts";
 import Post from "./types/Post.ts";
 import implementSort from "./utils/implementSort.ts";
 import makeFilterPredicate from "./utils/makeFilterPredicate.ts";
+import PostQuery from "./types/PostQuery.ts";
+import {defaultPostQuery} from "./data/DefaultPostData.ts";
 
 function App() {
     const [filterConditions, setFilterConditions] = useState<string[]>([])
     const [sortCondition, setSortCondition] = useState('Latest')
     const [categoryCondition, setCategoryCondition] = useState('')
     const [sectionCondition, setSectionCondition] = useState('')
-    const posts: Post[] = usePosts()
+    const [query, setQuery] = useState<PostQuery>(defaultPostQuery);
+    const posts = usePosts(query)
 
     let filteredPosts: Post[] = []
     if (posts !== undefined) {
@@ -38,11 +41,13 @@ function App() {
                 setFilterConditions={setFilterConditions}
                 sortCondition={sortCondition}
                 setSortCondition={setSortCondition}
+                setPostQuery={setQuery}
             />
             <Box display="flex">
                 <SideBar
                     setSectionCondition={setSectionCondition}
                     setCategoryCondition={setCategoryCondition}
+                    setPostQuery={setQuery}
                 />
                 <ContentSection posts={filteredPosts}/>
             </Box>

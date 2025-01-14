@@ -1,12 +1,13 @@
-import {useState} from "react";
+import {SetStateAction, useState} from "react";
 import {TextField, InputAdornment} from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search';
+import PostQuery from "../types/PostQuery.ts";
 
 type Props = {
-
+    setPostQuery: (input: SetStateAction<PostQuery>) => void;
 }
 
-export default function SearchInput({}: Props) {
+export default function SearchInput({setPostQuery}: Props) {
     const [searchKeyword, setSearchKeyword] = useState('')
 
     // Specify the input prop for search input, to allow adding search icon and other styles
@@ -22,6 +23,17 @@ export default function SearchInput({}: Props) {
         setSearchKeyword(e.target.value);
     }
 
+    function handleEnterKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
+        if (e.key === "Enter") {
+            setPostQuery((prevQuery: PostQuery) => {
+                return {
+                    ...prevQuery,
+                    search_keyword: searchKeyword
+                }
+            })
+        }
+    }
+
     return (
         <TextField
             size="small"
@@ -31,6 +43,7 @@ export default function SearchInput({}: Props) {
             }}
             value={searchKeyword}
             onChange={handleChange}
+            onKeyDown={handleEnterKeyDown}
             InputProps={searchBoxIconProps}
         />
     )

@@ -1,4 +1,4 @@
-import {useContext} from "react";
+import {SetStateAction, useContext} from "react";
 import {UserContext} from "../contexts/UserContext.tsx";
 import AppBar from '@mui/material/AppBar'
 import Logo from "./Logo.tsx";
@@ -6,20 +6,17 @@ import SearchBar from "./SearchBar.tsx";
 import {Box} from '@mui/material'
 import NewUserOptions from "./NewUserOptions.tsx";
 import LoggedInUserOptions from './LoggedInUserOptions'
+import PostQuery from "../types/PostQuery.ts";
 
 type Props = {
     filterConditions: string[];
     setFilterConditions: (filterConditions: string[]) => void;
     sortCondition: string;
     setSortCondition: (sortCondition: string) => void;
+    setPostQuery: (input: SetStateAction<PostQuery>) => void;
 }
 
-export default function NavBar({
-                                   filterConditions,
-                                   setFilterConditions,
-                                   sortCondition,
-                                   setSortCondition
-                               }: Props) {
+export default function NavBar(props: Props) {
     const [user] = useContext(UserContext)
     const loggedIn = user !== null
     return (
@@ -36,10 +33,7 @@ export default function NavBar({
                 <Box display="flex">
                     <Logo style={{width: "75px", margin: "0% 7.5% 0% 2.5%"}}/>
                     <SearchBar
-                        filterConditions={filterConditions}
-                        setFilterConditions={setFilterConditions}
-                        sortCondition={sortCondition}
-                        setSortCondition={setSortCondition}
+                        {...props}
                     />
                     <Box
                         sx={{
@@ -49,7 +43,7 @@ export default function NavBar({
                             marginRight: "auto",
                             alignItems: "center"
                         }}>
-                        {loggedIn ? <LoggedInUserOptions/> : <NewUserOptions/> }
+                        {loggedIn ? <LoggedInUserOptions/> : <NewUserOptions/>}
                     </Box>
                 </Box>
             </AppBar>
