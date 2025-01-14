@@ -8,7 +8,7 @@ type Post = {
     upvotes: string[];
     downvotes: string[];
     comments: string[];
-    createdAt: Date;
+    created_at: Date;
 }
 
 export default Post;
