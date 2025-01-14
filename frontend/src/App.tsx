@@ -6,14 +6,19 @@ import {Box} from "@mui/material"
 import ContentSection from "./components/ContentSection.tsx";
 import usePosts from "./hooks/usePosts.ts";
 import Post from "./types/Post.ts";
+import implementSort from "./utils/implementSort.ts";
 
 function App() {
     const [searchKeyword, setSearchKeyword] = useState('')
     const [filterConditions, setFilterConditions] = useState<string[]>([])
-    const [sortCondition, setSortCondition] = useState('')
+    const [sortCondition, setSortCondition] = useState('Latest')
     const [categoryCondition, setCategoryCondition] = useState('')
     const [sectionCondition, setSectionCondition] = useState('')
     const posts: Post[] = usePosts()
+
+    if (posts !== undefined) {
+        posts.sort(implementSort(sortCondition))
+    }
 
     // Just for passing Linting at the moment, once the variables are
     // actually used, should just delete immediately
