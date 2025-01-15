@@ -7,7 +7,8 @@ import ContentSection from "./components/ContentSection.tsx";
 import usePosts from "./hooks/usePosts.ts";
 import Post from "./types/Post.ts";
 import implementSort from "./utils/implementSort.ts";
-import makeFilterPredicate from "./utils/makeFilterPredicate.ts";
+import makeTagFilterPredicate from "./utils/makeTagFilterPredicate.ts";
+import makeCategoryFilterPredicate from "./utils/makeCategoryFilterPredicate.ts";
 
 function App() {
     const [searchKeyword, setSearchKeyword] = useState('')
@@ -19,7 +20,9 @@ function App() {
 
     let filteredPosts: Post[] = []
     if (posts !== undefined) {
-        filteredPosts = posts.filter(makeFilterPredicate(filterConditions))
+        filteredPosts = posts
+            .filter(makeCategoryFilterPredicate(categoryCondition))
+            .filter(makeTagFilterPredicate(filterConditions))
         filteredPosts.sort(implementSort(sortCondition))
     }
 
