@@ -4,7 +4,6 @@ import FilterDropdown from "./FilterDropdown";
 import SortDropdown from "./SortDropdown.tsx";
 
 type Props = {
-    searchKeyword: string;
     setSearchKeyword: (searchKeyword: string) => void;
     filterConditions: string[];
     setFilterConditions: (filterConditions: string[]) => void;
