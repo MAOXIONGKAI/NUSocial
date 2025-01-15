@@ -9,6 +9,7 @@ import Post from "./types/Post.ts";
 import implementSort from "./utils/implementSort.ts";
 import makeTagFilterPredicate from "./utils/makeTagFilterPredicate.ts";
 import makeCategoryFilterPredicate from "./utils/makeCategoryFilterPredicate.ts";
+import makeSearchPredicate from "./utils/makeSearchPredicate.ts";
 
 function App() {
     const [searchKeyword, setSearchKeyword] = useState('')
@@ -21,6 +22,7 @@ function App() {
     let filteredPosts: Post[] = []
     if (posts !== undefined) {
         filteredPosts = posts
+            .filter(makeSearchPredicate(searchKeyword))
             .filter(makeCategoryFilterPredicate(categoryCondition))
             .filter(makeTagFilterPredicate(filterConditions))
         filteredPosts.sort(implementSort(sortCondition))
@@ -38,7 +40,6 @@ function App() {
             justifyContent="space-between"
         >
             <NavBar
-                searchKeyword={searchKeyword}
                 setSearchKeyword={setSearchKeyword}
                 filterConditions={filterConditions}
                 setFilterConditions={setFilterConditions}
