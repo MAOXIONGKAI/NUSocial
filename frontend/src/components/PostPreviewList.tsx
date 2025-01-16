@@ -4,14 +4,15 @@ import {List} from "@mui/material";
 
 type Props = {
     posts: Post[]
+    updatePosts: () => void;
 }
 
-export default function PostPreviewList({posts}: Props) {
+export default function PostPreviewList({posts, updatePosts}: Props) {
     return (
         <List sx={{padding: 0, width: "100%"}}>
             {
                 posts.map((post: Post) => (
-                    <PostPreview key={post.id} post={post}/>
+                    <PostPreview key={post.id} post={post} updatePosts={updatePosts}/>
                 ))
             }
         </List>

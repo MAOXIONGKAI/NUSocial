@@ -8,6 +8,10 @@ import (
 	"net/http"
 )
 
+type PostActionRequestBody struct {
+	Username string `json:"username"`
+}
+
 func GetAllPosts(db *sql.DB, c *gin.Context) {
 	var posts []models.Post
 	rows, err := db.Query("SELECT * FROM posts")
@@ -46,4 +50,69 @@ func CreatePost(db *sql.DB, c *gin.Context) {
 		return
 	}
 	c.IndentedJSON(http.StatusCreated, newPost)
+}
+
+func UpvotePost(db *sql.DB, c *gin.Context) {
+	postId := c.Param("id")
+	var requestBody PostActionRequestBody
+	if err := c.BindJSON(&requestBody); err != nil {
+		c.IndentedJSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	username := requestBody.Username
+	result, err := db.Exec(
+		"UPDATE posts\n"+
+			"SET upvotes = CASE\n"+
+			"WHEN $1 = ANY(upvotes) THEN array_remove(upvotes, $1)\n"+
+			"ELSE array_append(upvotes, $1)\nEND\nWHERE id = $2;",
+		username, postId)
+	if err != nil {
+		c.IndentedJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	if rowsAffected == 0 {
+		c.JSON(http.StatusNotFound, gin.H{"message": "Post not found"})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"message": "Upvote toggled"})
+}
+
+func DownvotePost(db *sql.DB, c *gin.Context) {
+	postId := c.Param("id")
+	var requestBody PostActionRequestBody
+
+	if err := c.BindJSON(&requestBody); err != nil {
+		c.IndentedJSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+	}
+
+	username := requestBody.Username
+	result, err := db.Exec(
+		"UPDATE posts\n"+
+			"SET downvotes = CASE\n"+
+			"WHEN $1 = ANY(downvotes) THEN array_remove(downvotes, $1)\n"+
+			"ELSE array_append(downvotes, $1)\nEND\nWHERE id = $2;",
+		username, postId)
+	if err != nil {
+		c.IndentedJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	if rowsAffected == 0 {
+		c.JSON(http.StatusNotFound, gin.H{"message": "Post not found"})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"message": "Downvote toggled"})
 }

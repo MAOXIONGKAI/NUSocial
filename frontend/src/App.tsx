@@ -17,7 +17,7 @@ function App() {
     const [sortCondition, setSortCondition] = useState('Latest')
     const [categoryCondition, setCategoryCondition] = useState('')
     const [sectionCondition, setSectionCondition] = useState('')
-    const posts: Post[] = usePosts()
+    const [posts, updatePosts] = usePosts()
 
     let filteredPosts: Post[] = []
     if (posts !== undefined) {
@@ -51,7 +51,7 @@ function App() {
                     setSectionCondition={setSectionCondition}
                     setCategoryCondition={setCategoryCondition}
                 />
-                <ContentSection posts={filteredPosts}/>
+                <ContentSection posts={filteredPosts} updatePosts={updatePosts}/>
             </Box>
         </Box>
     )

@@ -3,10 +3,12 @@ import Post from "../types/Post.ts";
 import Reaction from "./Reaction.tsx";
 
 type Props = {
-    post: Post
+    post: Post;
+    updatePosts: () => void;
 }
 
-export default function PostPreview({post}: Props) {
+export default function PostPreview({post, updatePosts}: Props) {
+
     return (
         <>
             <Card variant="outlined" sx={{
@@ -26,7 +28,10 @@ export default function PostPreview({post}: Props) {
                     </CardContent>
                 </CardActionArea>
                 <CardActions sx={{padding: 0}}>
-                    <Reaction post={post}/>
+                    <Reaction
+                        post={post}
+                        updatePosts={updatePosts}
+                    />
                 </CardActions>
             </Card>
         </>

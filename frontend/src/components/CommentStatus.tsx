@@ -3,13 +3,14 @@ import CommentIcon from '@mui/icons-material/QuestionAnswerOutlined';
 
 type Props = {
     postId: number;
-    comments: number[];
+    comments: string[]
+    updatePosts: () => void;
 }
 
-export default function CommentStatus({postId, comments}: Props) {
-
+export default function CommentStatus({postId, comments, updatePosts}: Props) {
     function handleComment() {
         console.log("Open comment section of post with ID: " + postId);
+        updatePosts()
     }
 
     return (
