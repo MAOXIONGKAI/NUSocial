@@ -15,8 +15,8 @@ export default function Reaction({post, updatePosts}: Props) {
             display: "flex",
             gap: 2
         }}>
-            <Upvote postId={post.id} upvotes={post.upvotes} updatePosts={updatePosts} />
-            <Downvote postId={post.id} downvotes={post.downvotes} updatePosts={updatePosts}/>
+            <Upvote post={post} updatePosts={updatePosts} />
+            <Downvote post={post} updatePosts={updatePosts}/>
             <CommentStatus postId={post.id} comments={post.comments} updatePosts={updatePosts}/>
         </Box>
     )
