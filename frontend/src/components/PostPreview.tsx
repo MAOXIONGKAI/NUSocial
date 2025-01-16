@@ -1,6 +1,7 @@
 import {Avatar, Box, Card, CardContent, CardActionArea, Typography, CardActions} from "@mui/material";
 import Post from "../types/Post.ts";
 import Reaction from "./Reaction.tsx";
+import TimeFromNow from "./TimeFromNow.tsx";
 
 type Props = {
     post: Post;
@@ -20,7 +21,8 @@ export default function PostPreview({post, updatePosts}: Props) {
                     <CardContent sx={{display: "flex", flexDirection: "column", gap: 1}}>
                         <Box sx={{display: "flex", alignItems: "center", gap: 2}}>
                             <Avatar/>
-                            <Typography>{post.author}</Typography>
+                            <Typography sx={{marginRight: "10px"}}>{post.author}</Typography>
+                            <TimeFromNow date={post.created_at}/>
                         </Box>
                         <Typography variant="h6" sx={{fontSize: "20px"}}>{post.title}</Typography>
                         <Typography variant="body2"
