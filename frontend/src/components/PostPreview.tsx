@@ -1,7 +1,17 @@
-import {Avatar, Box, Card, CardContent, CardActionArea, Typography, CardActions} from "@mui/material";
+import {useState} from "react";
+import {
+    Avatar,
+    Box,
+    Card,
+    CardContent,
+    CardActionArea,
+    Typography,
+    CardActions,
+} from "@mui/material";
 import Post from "../types/Post.ts";
 import Reaction from "./Reaction.tsx";
 import TimeFromNow from "./TimeFromNow.tsx";
+import PostPage from "../pages/PostPage.tsx";
 
 type Props = {
     post: Post;
@@ -9,15 +19,24 @@ type Props = {
 }
 
 export default function PostPreview({post, updatePosts}: Props) {
+    const [openDetail, setOpenDetail] = useState(false);
+    const openPostDetail = () => setOpenDetail(true);
+    const closePostDetail = () => setOpenDetail(false);
 
     return (
         <>
+            <PostPage
+                post={post}
+                updatePosts={updatePosts}
+                open={openDetail}
+                onClose={closePostDetail}
+            />
             <Card variant="outlined" sx={{
                 width: "100%",
                 overflow: "auto",
                 zIndex: -1,
             }}>
-                <CardActionArea>
+                <CardActionArea onClick={openPostDetail}>
                     <CardContent sx={{display: "flex", flexDirection: "column", gap: 1}}>
                         <Box sx={{display: "flex", alignItems: "center", gap: 2}}>
                             <Avatar/>
