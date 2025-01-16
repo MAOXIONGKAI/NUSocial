@@ -18,5 +18,7 @@ func GetRoutes(r *gin.Engine, db *sql.DB) {
 
 		api.GET("/posts", handlers.MakeHandler(posts.GetAllPosts, db))
 		api.POST("/posts", handlers.MakeHandler(posts.CreatePost, db))
+		api.POST("/posts/upvote/:id", handlers.MakeHandler(posts.UpvotePost, db))
+		api.POST("/posts/downvote/:id", handlers.MakeHandler(posts.DownvotePost, db))
 	}
 }

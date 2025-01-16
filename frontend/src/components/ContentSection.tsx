@@ -3,9 +3,10 @@ import PostPreviewPage from "../pages/PostPreviewPage.tsx";
 import {Box} from "@mui/material";
 type ContentSectionProps = {
     posts: Post[];
+    updatePosts: () => void;
 }
 
-export default function ContentSection({posts}: ContentSectionProps) {
+export default function ContentSection({posts, updatePosts}: ContentSectionProps) {
     return (
         <Box sx={{
             width: "100%",
@@ -18,7 +19,7 @@ export default function ContentSection({posts}: ContentSectionProps) {
                 display: 'none',
             },
         }}>
-            <PostPreviewPage posts={posts} />
+            <PostPreviewPage posts={posts} updatePosts={updatePosts}/>
         </Box>
     )
 }
