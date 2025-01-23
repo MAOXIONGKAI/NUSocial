@@ -1,8 +1,10 @@
 import NoComment from '../assets/no-comment.png'
 import {Box, Typography} from "@mui/material";
+import Comment from './Comment';
+import CommentType from "../types/Comment.ts";
 
 type Props = {
-    comments: string[]
+    comments: CommentType[]
 }
 
 const NoCommentNotice = () => {
@@ -16,11 +18,11 @@ const NoCommentNotice = () => {
                 width="20%"
                 src={NoComment}
                 alt="Background when no comments in the comment section"
-                style={{ filter: 'opacity(40%)' }}
+                style={{filter: 'opacity(40%)'}}
             />
             <Typography>
                 Nobody has responded to this post yet...
-                <br />
+                <br/>
                 Be the first to reply!
             </Typography>
         </Box>
@@ -38,7 +40,10 @@ export default function CommentSection({comments}: Props) {
             {
                 comments.length === 0
                     ? <NoCommentNotice/>
-                    : <></>
+                    : <>{comments.map(
+                        comment =>
+                        <Comment key={comment.id} comment={comment}/>)}
+                        </>
             }
         </Box>
     )

@@ -2,6 +2,7 @@ package routes
 
 import (
 	"backend/internal/handlers"
+	"backend/internal/handlers/comments"
 	"backend/internal/handlers/posts"
 	"backend/internal/handlers/users"
 	"database/sql"
@@ -20,5 +21,7 @@ func GetRoutes(r *gin.Engine, db *sql.DB) {
 		api.POST("/posts", handlers.MakeHandler(posts.CreatePost, db))
 		api.POST("/posts/upvote/:id", handlers.MakeHandler(posts.UpvotePost, db))
 		api.POST("/posts/downvote/:id", handlers.MakeHandler(posts.DownvotePost, db))
+
+		api.POST("/comments", handlers.MakeHandler(comments.CreateComment, db))
 	}
 }
