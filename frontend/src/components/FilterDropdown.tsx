@@ -49,7 +49,7 @@ export default function FilterDropdown({
             >
                 <Autocomplete
                     multiple
-                    freeSolo
+                    freeSolo={false}
                     disableCloseOnSelect
                     sx={{width: "40vw"}}
                     id="filter-dropdown-menu"

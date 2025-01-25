@@ -129,7 +129,7 @@ export default function PostCreationDialog({updatePosts}: Props) {
                             </TextField>
                             <Autocomplete
                                 multiple
-                                freeSolo
+                                freeSolo={false}
                                 disableCloseOnSelect
                                 options={filterTags}
                                 sx={{width: "80%"}}
