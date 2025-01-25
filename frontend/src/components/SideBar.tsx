@@ -1,13 +1,12 @@
 import Box from '@mui/material/Box'
 import IconMenu from "./IconMenu.tsx";
-import {sectionMenuOptions, categoryMenuOptions} from "../data/MenuData.tsx";
+import {categoryMenuOptions} from "../data/MenuData.tsx";
 
 type Props = {
-    setSectionCondition: (condition: string) => void;
     setCategoryCondition: (condition: string) => void;
 }
 
-export default function SideBar({setSectionCondition, setCategoryCondition}: Props) {
+export default function SideBar({setCategoryCondition}: Props) {
     return (
         <Box
             display="flex"
@@ -18,11 +17,6 @@ export default function SideBar({setSectionCondition, setCategoryCondition}: Pro
             }}
         >
             <IconMenu
-                layoutList={sectionMenuOptions}
-                setSelectedOption={setSectionCondition}
-            />
-            <IconMenu
-                header="Category"
                 layoutList={categoryMenuOptions}
                 setSelectedOption={setCategoryCondition}
             />

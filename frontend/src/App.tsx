@@ -16,7 +16,6 @@ function App() {
     const [filterConditions, setFilterConditions] = useState<string[]>([])
     const [sortCondition, setSortCondition] = useState('Latest')
     const [categoryCondition, setCategoryCondition] = useState('')
-    const [sectionCondition, setSectionCondition] = useState('')
     const [posts, updatePosts] = usePosts()
 
     let filteredPosts: Post[] = []
@@ -27,10 +26,6 @@ function App() {
             .filter(makeTagFilterPredicate(filterConditions))
         filteredPosts.sort(implementSort(sortCondition))
     }
-
-    // Just for passing Linting at the moment, once the variables are
-    // actually used, should just delete immediately
-    console.log(sectionCondition, categoryCondition)
 
     return (
         <Box
@@ -49,7 +44,6 @@ function App() {
             />
             <Box display="flex">
                 <SideBar
-                    setSectionCondition={setSectionCondition}
                     setCategoryCondition={setCategoryCondition}
                 />
                 <ContentSection posts={filteredPosts} updatePosts={updatePosts}/>
