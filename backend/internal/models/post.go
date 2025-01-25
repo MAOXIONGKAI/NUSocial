@@ -14,6 +14,6 @@ type Post struct {
 	Body      string         `json:"body"`
 	Upvotes   pq.StringArray `json:"upvotes"`
 	Downvotes pq.StringArray `json:"downvotes"`
-	Comments  pq.StringArray `json:"comments"`
+	Comments  pq.Int64Array  `json:"comments"`
 	CreatedAt time.Time      `json:"created_at"`
 }
