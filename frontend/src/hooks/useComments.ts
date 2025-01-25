@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import CommentType from "../types/Comment";
 import Comment from "../types/Comment";
-const backendURL = process.env.REACT_APP_BACKEND_URL;
+import {backendURL} from "../data/Config.ts";
 
 type ReturnType = CommentType | null
 
