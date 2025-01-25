@@ -6,7 +6,6 @@ import {
     Typography,
     Box,
     IconButton,
-    TextField
 } from '@mui/material'
 import Post from "../types/Post.ts";
 import CloseIcon from "@mui/icons-material/Close";
@@ -22,6 +21,7 @@ type Props = {
 }
 
 export default function PostPage({post, updatePosts, open, onClose}: Props) {
+
     return (
         <Dialog
             open={open}
@@ -87,10 +87,11 @@ export default function PostPage({post, updatePosts, open, onClose}: Props) {
                     {post.body}
                 </Typography>
                 <Reaction post={post} updatePosts={updatePosts}/>
-                <TextField
-                    placeholder="Add a comment"
+                <CommentSection
+                    postId={post.id}
+                    comments={post.comments}
+                    updatePosts={updatePosts}
                 />
-                <CommentSection comments={post.comments}/>
             </DialogContent>
         </Dialog>
     )

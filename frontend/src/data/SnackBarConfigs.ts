@@ -23,3 +23,9 @@ export const successfulPostCreation: SnackBarConfig = {
     severity: "success",
     message: "You have successfully created a new post"
 }
+
+export const successfulCommentCreation: SnackBarConfig = {
+    open: true,
+    severity: "success",
+    message: "You have successfully commented under this post"
+}

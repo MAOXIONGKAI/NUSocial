@@ -1,14 +1,11 @@
-type Post = {
+type Comment = {
     id: number;
     author: string;
-    category: string;
-    tags: string[];
-    title: string;
-    body: string;
+    text: string;
     upvotes: string[];
     downvotes: string[];
     comments: number[];
     created_at: Date;
 }
 
-export default Post;
+export default Comment

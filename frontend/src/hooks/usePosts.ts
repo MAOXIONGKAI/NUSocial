@@ -8,7 +8,9 @@ type ReturnType = [posts: Post[], updatePosts: () => void]
 // This functions accepts the value returned from backend
 // and convert the date string to JS Date object for easier date handling
 function parseCreationDate(post: Post): Post {
-    return {...post, created_at: new Date(post.created_at)}
+    return {
+        ...post,
+        created_at: new Date(post.created_at)}
 }
 
 // Fetch and update posts based on the predicate provided

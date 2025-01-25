@@ -1,5 +1,6 @@
 import User from "../types/User";
 import Post from "../types/Post.ts";
+import Comment from "../types/Comment.ts";
 
 export const tempUser1: User = {
     username: "Mao Xiongkai",
@@ -16,7 +17,7 @@ export const post1: Post = {
     upvotes: [],
     downvotes: [],
     comments: [],
-    createdAt: new Date(),
+    created_at: new Date(),
 }
 
 export const post2: Post = {
@@ -28,6 +29,16 @@ export const post2: Post = {
     body: "I need to pay my school fee how should I settle it with the office",
     upvotes: ["MAO XIONGKAI", "ZHU TIANYI", "Eline Ngu"],
     downvotes: ["Huang Jiaxi","Tester123"],
-    comments: ["NewUser"],
-    createdAt: new Date()
+    comments: [],
+    created_at: new Date()
+}
+
+export const comment1: Comment = {
+    id: 1,
+    author: "MAO XIONGKAI",
+    text: "This is a sample comment",
+    upvotes: [],
+    downvotes: [],
+    comments: [],
+    created_at: new Date("2025-01-23 18:00")
 }

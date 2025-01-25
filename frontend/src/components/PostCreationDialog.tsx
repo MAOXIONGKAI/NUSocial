@@ -73,7 +73,6 @@ export default function PostCreationDialog() {
                 handleClose()
             })
             .catch((err: AxiosError) => console.log(err.response?.data))
-
     }
 
     return (
