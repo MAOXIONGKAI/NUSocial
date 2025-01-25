@@ -16,6 +16,7 @@
     "moduleDetection": "force",
     "noEmit": false,
     "declaration": true,
+    "declarationDir": "./types",
     "outDir": "./dist",
     "jsx": "react-jsx",
 
