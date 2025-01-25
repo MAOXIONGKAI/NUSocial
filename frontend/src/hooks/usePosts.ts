@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react'
 import Post from "../types/Post.ts";
 import axios, {AxiosError, AxiosResponse} from "axios";
-import {backendURL} from "../data/Environment.ts";
+const backendURL = process.env.REACT_APP_BACKEND_URL;
 
 type ReturnType = [posts: Post[], updatePosts: () => void]
 
