@@ -1,5 +1,5 @@
 import axios from "axios";
-const backendURL = process.env.REACT_APP_BACKEND_URL;
+import {backendURL} from "../data/Config.ts";
 
 export default function upvotePost(postId: number, username: string) {
     axios.post(`${backendURL}/api/posts/upvote/${postId}`, {username: username})

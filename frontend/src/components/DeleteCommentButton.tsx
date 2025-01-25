@@ -3,7 +3,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import axios, {AxiosResponse} from "axios";
 import useSnackBar from "../hooks/useSnackBar.ts";
 import {successfulDeleteCommand} from "../data/SnackBarConfigs.ts";
-const backendURL = process.env.REACT_APP_BACKEND_URL;
+import {backendURL} from "../data/Config.ts";
 
 type Props = {
     commentId: number;

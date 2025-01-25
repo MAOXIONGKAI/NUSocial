@@ -4,7 +4,7 @@ import axios, {AxiosError, AxiosResponse} from "axios";
 import {UserContext} from "../contexts/UserContext.tsx";
 import useSnackBar from "../hooks/useSnackBar.ts";
 import {successfulCommentCreation} from "../data/SnackBarConfigs.ts";
-const backendURL = process.env.REACT_APP_BACKEND_URL;
+import {backendURL} from "../data/Config.ts";
 
 type Props = {
     postId: number;

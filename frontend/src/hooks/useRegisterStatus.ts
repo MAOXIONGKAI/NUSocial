@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react'
 import axios, {AxiosError, AxiosResponse} from "axios";
-const backendURL = process.env.REACT_APP_BACKEND_URL;
+import {backendURL} from "../data/Config.ts";
 
 export default function useRegisterStatus(username: string): boolean {
     const [isRegistered, setIsRegistered] = useState(false)
