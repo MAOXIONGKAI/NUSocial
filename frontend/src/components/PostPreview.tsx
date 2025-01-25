@@ -12,6 +12,7 @@ import Post from "../types/Post.ts";
 import Reaction from "./Reaction.tsx";
 import TimeFromNow from "./TimeFromNow.tsx";
 import PostPage from "../pages/PostPage.tsx";
+import DeletePostButton from "./DeletePostButton.tsx";
 
 type Props = {
     post: Post;
@@ -53,6 +54,7 @@ export default function PostPreview({post, updatePosts}: Props) {
                         post={post}
                         updatePosts={updatePosts}
                     />
+                    <DeletePostButton postId={post.id} updatePosts={updatePosts}/>
                 </CardActions>
             </Card>
         </>

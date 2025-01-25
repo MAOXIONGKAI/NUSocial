@@ -45,6 +45,7 @@ function App() {
                 setFilterConditions={setFilterConditions}
                 sortCondition={sortCondition}
                 setSortCondition={setSortCondition}
+                updatePosts={updatePosts}
             />
             <Box display="flex">
                 <SideBar

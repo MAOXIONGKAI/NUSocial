@@ -13,6 +13,7 @@ type Props = {
     setFilterConditions: (filterConditions: string[]) => void;
     sortCondition: string;
     setSortCondition: (sortCondition: string) => void;
+    updatePosts: () => void;
 }
 
 export default function NavBar({
@@ -20,7 +21,8 @@ export default function NavBar({
                                    filterConditions,
                                    setFilterConditions,
                                    sortCondition,
-                                   setSortCondition
+                                   setSortCondition,
+                                   updatePosts
                                }: Props) {
     const [user] = useContext(UserContext)
     const loggedIn = user !== null
@@ -52,7 +54,10 @@ export default function NavBar({
                             marginRight: "auto",
                             alignItems: "center"
                         }}>
-                        {loggedIn ? <LoggedInUserOptions/> : <NewUserOptions/> }
+                        {loggedIn
+                            ? <LoggedInUserOptions updatePosts={updatePosts}/>
+                            : <NewUserOptions/>
+                        }
                     </Box>
                 </Box>
             </AppBar>

@@ -3,7 +3,7 @@ import CommentIcon from '@mui/icons-material/QuestionAnswerOutlined';
 
 type Props = {
     postId: number;
-    comments: string[]
+    comments: number[]
     updatePosts: () => void;
 }
 

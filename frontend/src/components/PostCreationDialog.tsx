@@ -21,7 +21,11 @@ import axios, {AxiosError, AxiosResponse} from "axios";
 import useSnackBar from "../hooks/useSnackBar.ts";
 import {successfulPostCreation} from "../data/SnackBarConfigs.ts";
 
-export default function PostCreationDialog() {
+type Props = {
+    updatePosts: () => void;
+}
+
+export default function PostCreationDialog({updatePosts}: Props) {
     const [open, setOpen] = useState(false)
     const [user,] = useContext(UserContext)
     const showSuccessfulPostCreation = useSnackBar(successfulPostCreation)
@@ -69,6 +73,7 @@ export default function PostCreationDialog() {
         }
         axios.post("http://localhost:8080/api/posts", newPost)
             .then((_res: AxiosResponse) => {
+                updatePosts()
                 showSuccessfulPostCreation()
                 handleClose()
             })
