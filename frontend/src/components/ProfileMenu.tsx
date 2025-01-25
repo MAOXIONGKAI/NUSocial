@@ -2,9 +2,7 @@ import {useState, useContext} from "react";
 import {UserContext} from "../contexts/UserContext.tsx";
 import {
     IconButton,
-    ListItemIcon,
     Menu,
-    MenuItem,
     Box,
     Avatar,
     Divider,
@@ -12,10 +10,6 @@ import {
     Typography
 } from "@mui/material";
 import ProfileMenuIcon from '@mui/icons-material/AccountCircle';
-import ProfileIcon from '@mui/icons-material/Person';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import NightModeIcon from '@mui/icons-material/Brightness4';
-import ReportIssueIcon from '@mui/icons-material/BugReport';
 import LogOutButton from "./LogOutButton.tsx";
 
 export default function ProfileMenu() {
@@ -62,22 +56,6 @@ export default function ProfileMenu() {
                     </Box>
                 </ListSubheader>
                 <Divider/>
-                <MenuItem>
-                    <ListItemIcon><ProfileIcon/></ListItemIcon>
-                    My Profile
-                </MenuItem>
-                <MenuItem>
-                    <ListItemIcon><FavoriteIcon/></ListItemIcon>
-                    Favorite
-                </MenuItem>
-                <MenuItem>
-                    <ListItemIcon><NightModeIcon/></ListItemIcon>
-                    Night Mode
-                </MenuItem>
-                <MenuItem>
-                    <ListItemIcon><ReportIssueIcon/></ListItemIcon>
-                    Report Issue
-                </MenuItem>
                 <LogOutButton />
             </Menu>
         </>
