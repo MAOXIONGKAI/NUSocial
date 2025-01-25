@@ -1,8 +1,6 @@
 package config
 
 import (
-	"github.com/joho/godotenv"
-	"log"
 	"os"
 )
 
@@ -13,10 +11,11 @@ type DBConfig struct {
 }
 
 func LoadDBConfig() DBConfig {
-	err := godotenv.Load()
+	// Load environment variable from .env file only when running locally
+	/*err := godotenv.Load()
 	if err != nil {
 		log.Fatal("Error loading .env file")
-	}
+	}*/
 
 	return DBConfig{
 		User:          os.Getenv("DB_USER"),
