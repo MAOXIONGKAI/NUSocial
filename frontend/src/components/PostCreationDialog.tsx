@@ -20,7 +20,7 @@ import {UserContext} from "../contexts/UserContext.tsx";
 import axios, {AxiosError, AxiosResponse} from "axios";
 import useSnackBar from "../hooks/useSnackBar.ts";
 import {successfulPostCreation} from "../data/SnackBarConfigs.ts";
-import {backendURL} from "../data/Environment.ts";
+const backendURL = process.env.REACT_APP_BACKEND_URL;
 
 type Props = {
     updatePosts: () => void;

@@ -19,7 +19,7 @@ import hasEmptyField from "../utils/hasEmptyField.ts";
 import useSnackBar from "../hooks/useSnackBar.ts";
 import {successfulLogin} from "../data/SnackBarConfigs.ts";
 import {usernameLengthLimit} from "../data/InputLimit.ts";
-import {backendURL} from "../data/Environment.ts";
+const backendURL = process.env.REACT_APP_BACKEND_URL;
 
 export default function LoginFormDialog() {
     const [open, setOpen] = useState(false);
