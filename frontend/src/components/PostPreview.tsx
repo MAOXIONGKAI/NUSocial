@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useContext, useState} from "react";
 import {
     Avatar,
     Box,
@@ -13,6 +13,7 @@ import Reaction from "./Reaction.tsx";
 import TimeFromNow from "./TimeFromNow.tsx";
 import PostPage from "../pages/PostPage.tsx";
 import DeletePostButton from "./DeletePostButton.tsx";
+import {UserContext} from "../contexts/UserContext.tsx";
 
 type Props = {
     post: Post;
@@ -23,6 +24,9 @@ export default function PostPreview({post, updatePosts}: Props) {
     const [openDetail, setOpenDetail] = useState(false);
     const openPostDetail = () => setOpenDetail(true);
     const closePostDetail = () => setOpenDetail(false);
+
+    const [user,] = useContext(UserContext)
+    const isOwnPost = user?.username === post.author
 
     return (
         <>
@@ -54,7 +58,10 @@ export default function PostPreview({post, updatePosts}: Props) {
                         post={post}
                         updatePosts={updatePosts}
                     />
-                    <DeletePostButton postId={post.id} updatePosts={updatePosts}/>
+                    {isOwnPost && <DeletePostButton
+                        postId={post.id}
+                        updatePosts={updatePosts}
+                    />}
                 </CardActions>
             </Card>
         </>
