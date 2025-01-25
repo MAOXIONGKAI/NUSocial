@@ -3,10 +3,11 @@ import IconMenu from "./IconMenu.tsx";
 import {categoryMenuOptions} from "../data/MenuData.tsx";
 
 type Props = {
+    categoryCondition: string;
     setCategoryCondition: (condition: string) => void;
 }
 
-export default function SideBar({setCategoryCondition}: Props) {
+export default function SideBar({categoryCondition, setCategoryCondition}: Props) {
     return (
         <Box
             display="flex"
@@ -18,6 +19,7 @@ export default function SideBar({setCategoryCondition}: Props) {
         >
             <IconMenu
                 layoutList={categoryMenuOptions}
+                selectedOption={categoryCondition}
                 setSelectedOption={setCategoryCondition}
             />
         </Box>

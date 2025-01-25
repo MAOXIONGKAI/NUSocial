@@ -44,6 +44,7 @@ function App() {
             />
             <Box display="flex">
                 <SideBar
+                    categoryCondition={categoryCondition}
                     setCategoryCondition={setCategoryCondition}
                 />
                 <ContentSection posts={filteredPosts} updatePosts={updatePosts}/>
