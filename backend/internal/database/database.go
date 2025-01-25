@@ -10,8 +10,8 @@ import (
 
 var DBConfig = config.LoadDBConfig()
 
-var connectionStr = fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
-	DBConfig.Host, DBConfig.Port, DBConfig.User, DBConfig.Password, DBConfig.Name)
+var connectionStr = fmt.Sprintf("postgres://%s:%s@%s",
+	DBConfig.User, DBConfig.Password, DBConfig.ConnectionStr)
 
 func ConnectDB() *sql.DB {
 	db, err := sql.Open("postgres", connectionStr)

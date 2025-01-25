@@ -37,8 +37,7 @@ func GetPostComments(db *sql.DB, c *gin.Context) {
 	var comments []models.Comment
 	for rows.Next() {
 		var comment models.Comment
-		if err := rows.Scan(&comment.ID, &comment.Author, &comment.Text,
-			&comment.Upvotes, &comment.Downvotes, &comment.Comments, &comment.CreatedAt); err != nil {
+		if err := rows.Scan(&comment.ID, &comment.Author, &comment.Text, &comment.CreatedAt); err != nil {
 			c.IndentedJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 			return
 		}
@@ -61,8 +60,7 @@ func GetCommentbyId(db *sql.DB, c *gin.Context) {
 
 	row := db.QueryRow("SELECT * FROM comments WHERE id = $1", commentId)
 	var comment models.Comment
-	err = row.Scan(&comment.ID, &comment.Author, &comment.Text, &comment.Upvotes, &comment.Downvotes,
-		&comment.Comments, &comment.CreatedAt)
+	err = row.Scan(&comment.ID, &comment.Author, &comment.Text, &comment.CreatedAt)
 
 	if err != nil {
 		if err == sql.ErrNoRows {
@@ -89,10 +87,8 @@ func CreatePostComment(db *sql.DB, c *gin.Context) {
 	}
 
 	var newCommentId int64
-	if err := db.QueryRow("INSERT INTO comments (author, text, upvotes, downvotes, comments) "+
-		"VALUES ($1, $2, $3, $4, $5) RETURNING id", newComment.Author, newComment.Text,
-		pq.Array(newComment.Upvotes), pq.Array(newComment.Downvotes),
-		pq.Array(newComment.Comments)).Scan(&newCommentId); err != nil {
+	if err := db.QueryRow("INSERT INTO comments (author, text) "+
+		"VALUES ($1, $2) RETURNING id", newComment.Author, newComment.Text).Scan(&newCommentId); err != nil {
 		c.IndentedJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}

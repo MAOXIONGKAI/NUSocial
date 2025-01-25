@@ -7,11 +7,9 @@ import (
 )
 
 type DBConfig struct {
-	Host     string
-	Port     string
-	User     string
-	Password string
-	Name     string
+	User          string
+	Password      string
+	ConnectionStr string
 }
 
 func LoadDBConfig() DBConfig {
@@ -21,10 +19,8 @@ func LoadDBConfig() DBConfig {
 	}
 
 	return DBConfig{
-		Host:     os.Getenv("DB_HOST"),
-		Port:     os.Getenv("DB_PORT"),
-		User:     os.Getenv("DB_USER"),
-		Password: os.Getenv("DB_PASSWORD"),
-		Name:     os.Getenv("DB_NAME"),
+		User:          os.Getenv("DB_USER"),
+		Password:      os.Getenv("DB_PASSWORD"),
+		ConnectionStr: os.Getenv("AWS_DB_ENDPOINT"),
 	}
 }

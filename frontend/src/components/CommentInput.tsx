@@ -20,9 +20,6 @@ export default function CommentInput({postId, refreshComments, updatePosts}: Pro
     const commentObj = {
         author: user?.username,
         text: comment,
-        upvotes: [],
-        downvotes: [],
-        comments: []
     }
 
     function handleFocus() {
@@ -45,6 +42,9 @@ export default function CommentInput({postId, refreshComments, updatePosts}: Pro
     }
 
     function handleSubmit() {
+        if (!commentObj.text) {
+            return
+        }
         axios.post(`http://localhost:8080/api/posts/comments/${postId}`, commentObj)
             .then((res: AxiosResponse) => {
                 if (res.data) {

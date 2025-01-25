@@ -12,7 +12,7 @@ func GetUser(db *sql.DB, c *gin.Context) {
 	username := c.Param("username")
 	var user models.User
 	row := db.QueryRow("SELECT * FROM users WHERE username = $1", username)
-	if err := row.Scan(&user.ID, &user.Username, &user.Password); err != nil {
+	if err := row.Scan(&user.ID, &user.Username, &user.Password, &user.CreatedAt); err != nil {
 		if err == sql.ErrNoRows {
 			c.IndentedJSON(http.StatusNotFound, gin.H{"message": "user not found"})
 		}
@@ -25,19 +25,21 @@ func GetAllUsers(db *sql.DB, c *gin.Context) {
 	var users []models.User
 	rows, err := db.Query("SELECT * FROM users")
 	if err != nil {
-		c.IndentedJSON(http.StatusInternalServerError, gin.H{"message": err})
+		c.IndentedJSON(http.StatusInternalServerError, gin.H{"message": err.Error()})
 		return
 	}
 	defer rows.Close()
 	for rows.Next() {
 		var user models.User
-		if err := rows.Scan(&user.ID, &user.Username, &user.Password); err != nil {
-			c.IndentedJSON(http.StatusInternalServerError, gin.H{"message": err})
+		if err := rows.Scan(&user.ID, &user.Username, &user.Password, &user.CreatedAt); err != nil {
+			c.IndentedJSON(http.StatusInternalServerError, gin.H{"message": err.Error()})
+			return
 		}
 		users = append(users, user)
 	}
 	if err := rows.Err(); err != nil {
 		log.Fatal(err)
+		return
 	}
 	c.IndentedJSON(http.StatusOK, users)
 }
@@ -47,6 +49,7 @@ func CreateUser(db *sql.DB, c *gin.Context) {
 
 	if err := c.BindJSON(&newUser); err != nil {
 		c.IndentedJSON(http.StatusBadRequest, gin.H{"message": err.Error()})
+		return
 	}
 
 	_, err := db.Exec("INSERT INTO users(username,password) VALUES($1,$2)", newUser.Username, newUser.Password)
