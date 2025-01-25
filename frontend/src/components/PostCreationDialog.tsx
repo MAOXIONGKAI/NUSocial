@@ -20,6 +20,7 @@ import {UserContext} from "../contexts/UserContext.tsx";
 import axios, {AxiosError, AxiosResponse} from "axios";
 import useSnackBar from "../hooks/useSnackBar.ts";
 import {successfulPostCreation} from "../data/SnackBarConfigs.ts";
+import {backendURL} from "../data/Environment.ts";
 
 type Props = {
     updatePosts: () => void;
@@ -77,7 +78,7 @@ export default function PostCreationDialog({updatePosts}: Props) {
             downvotes: [],
             comments: []
         }
-        axios.post("http://localhost:8080/api/posts", newPost)
+        axios.post(`${backendURL}/api/posts`, newPost)
             .then((_res: AxiosResponse) => {
                 updatePosts()
                 showSuccessfulPostCreation()

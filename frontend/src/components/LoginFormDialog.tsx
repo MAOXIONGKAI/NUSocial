@@ -19,6 +19,7 @@ import hasEmptyField from "../utils/hasEmptyField.ts";
 import useSnackBar from "../hooks/useSnackBar.ts";
 import {successfulLogin} from "../data/SnackBarConfigs.ts";
 import {usernameLengthLimit} from "../data/InputLimit.ts";
+import {backendURL} from "../data/Environment.ts";
 
 export default function LoginFormDialog() {
     const [open, setOpen] = useState(false);
@@ -51,7 +52,7 @@ export default function LoginFormDialog() {
         }
 
         e.preventDefault();
-        axios.get(`http://localhost:8080/api/users/${formData.username}`)
+        axios.get(`${backendURL}/api/users/${formData.username}`)
             .then((res: AxiosResponse) => {
                 setUserDoesNotExist(false)
                 const user: User = res.data

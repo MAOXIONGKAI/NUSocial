@@ -3,6 +3,7 @@ import DeleteIcon from "@mui/icons-material/Delete"
 import axios, {AxiosError} from "axios";
 import useSnackBar from "../hooks/useSnackBar.ts";
 import {successfulDeletePost} from "../data/SnackBarConfigs.ts";
+import {backendURL} from "../data/Environment.ts";
 
 type Props = {
     postId: number;
@@ -13,7 +14,7 @@ export default function DeletePostButton({postId, updatePosts}: Props) {
     const showDeleteSuccess = useSnackBar(successfulDeletePost)
 
     function handleDeletePost(postId: number) {
-        axios.delete(`http://localhost:8080/api/posts/${postId}`)
+        axios.delete(`${backendURL}/api/posts/${postId}`)
             .then(res => {
                 if (res.status === 200) {
                     updatePosts()

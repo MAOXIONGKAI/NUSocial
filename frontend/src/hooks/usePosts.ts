@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react'
 import Post from "../types/Post.ts";
 import axios, {AxiosError, AxiosResponse} from "axios";
+import {backendURL} from "../data/Environment.ts";
 
 type ReturnType = [posts: Post[], updatePosts: () => void]
 
@@ -24,7 +25,7 @@ export default function usePosts(): ReturnType {
     }
 
     useEffect(() => {
-        axios.get("http://localhost:8080/api/posts")
+        axios.get(`${backendURL}/api/posts`)
             .then((res: AxiosResponse) => {
                 const result: Post[] = (res.data)
                     .map(parseCreationDate)

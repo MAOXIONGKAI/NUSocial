@@ -19,6 +19,7 @@ import useSnackBar from "../hooks/useSnackBar.ts";
 import {successfulSignUp} from "../data/SnackBarConfigs.ts";
 import {UserContext} from "../contexts/UserContext.tsx";
 import {usernameLengthLimit} from "../data/InputLimit.ts";
+import {backendURL} from "../data/Environment.ts";
 
 export default function SignUpFormDialog() {
     const [open, setOpen] = useState(false);
@@ -51,7 +52,7 @@ export default function SignUpFormDialog() {
         }
         e.preventDefault();
         const {confirmPassword, ...newUser} = formData
-        axios.post("http://localhost:8080/api/users", newUser)
+        axios.post(`${backendURL}/api/users`, newUser)
             .then((res: AxiosResponse) => {
                 setUser(res.data)
                 showSuccessSignUpMessage()

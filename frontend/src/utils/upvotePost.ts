@@ -1,7 +1,8 @@
 import axios from "axios";
+import {backendURL} from "../data/Environment.ts";
 
 export default function upvotePost(postId: number, username: string) {
-    axios.post(`http://localhost:8080/api/posts/upvote/${postId}`, {username: username})
+    axios.post(`${backendURL}/api/posts/upvote/${postId}`, {username: username})
         .catch(err => console.log("Error when handling post upvote status: "
             + err.response?.data))
 }
