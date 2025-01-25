@@ -64,6 +64,12 @@ export default function PostCreationDialog({updatePosts}: Props) {
     };
 
     function handleSubmit() {
+        if (!formData.title
+            || !formData.body
+            || !formData.category
+            || formData.tags.length === 0) {
+            return
+        }
         const newPost = {
             ...formData,
             author: user?.username,
