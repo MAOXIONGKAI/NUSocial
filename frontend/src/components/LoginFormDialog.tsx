@@ -18,6 +18,7 @@ import {loginFormDefaultData} from "../data/DefaultFormData.ts";
 import hasEmptyField from "../utils/hasEmptyField.ts";
 import useSnackBar from "../hooks/useSnackBar.ts";
 import {successfulLogin} from "../data/SnackBarConfigs.ts";
+import {usernameLengthLimit} from "../data/InputLimit.ts";
 
 export default function LoginFormDialog() {
     const [open, setOpen] = useState(false);
@@ -96,6 +97,9 @@ export default function LoginFormDialog() {
                             name="username"
                             value={formData.username}
                             onChange={handleChange}
+                            inputProps={{
+                                maxLength: usernameLengthLimit,
+                            }}
                         />
                         <TextField
                             label="Password"

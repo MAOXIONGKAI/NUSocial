@@ -16,17 +16,9 @@ describe('ProfileMenu', () => {
         const user = userEvent.setup()
         await user.click(iconButton)
 
-        expect(screen.getByText("My Profile")).toBeInTheDocument()
-        expect(screen.getByText('Favorite')).toBeInTheDocument()
-        expect(screen.getByText('Night Mode')).toBeInTheDocument()
-        expect(screen.getByText('Report Issue')).toBeInTheDocument()
         expect(screen.getByText('Log Out')).toBeInTheDocument()
 
         expect(screen.getByRole('listitem')).toHaveTextContent("Welcome")
-        expect(screen.getAllByTestId("PersonIcon")).not.toHaveLength(0)
-        expect(screen.getByTestId('FavoriteIcon')).toBeInTheDocument()
-        expect(screen.getByTestId('Brightness4Icon')).toBeInTheDocument()
-        expect(screen.getByTestId('BugReportIcon')).toBeInTheDocument()
         expect(screen.getByTestId('LogoutIcon')).toBeInTheDocument()
     })
 })

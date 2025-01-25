@@ -64,6 +64,12 @@ export default function PostCreationDialog({updatePosts}: Props) {
     };
 
     function handleSubmit() {
+        if (!formData.title
+            || !formData.body
+            || !formData.category
+            || formData.tags.length === 0) {
+            return
+        }
         const newPost = {
             ...formData,
             author: user?.username,
@@ -129,7 +135,7 @@ export default function PostCreationDialog({updatePosts}: Props) {
                             </TextField>
                             <Autocomplete
                                 multiple
-                                freeSolo
+                                freeSolo={false}
                                 disableCloseOnSelect
                                 options={filterTags}
                                 sx={{width: "80%"}}

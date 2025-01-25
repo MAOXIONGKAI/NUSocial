@@ -34,7 +34,7 @@ export default function NavBar({
                     width: "100%",
                     padding: "10px 0px",
                     backgroundColor: "white",
-                    boxShadow: 0
+                    boxShadow: "0px 2px 2px -2px rgba(0, 0, 0, 0.5)"
                 }}
             >
                 <Box display="flex">
