@@ -6,15 +6,12 @@ import {
     Typography,
     Box,
     IconButton,
-    TextField
 } from '@mui/material'
 import Post from "../types/Post.ts";
 import CloseIcon from "@mui/icons-material/Close";
 import Reaction from "../components/Reaction.tsx";
 import CommentSection from "../components/CommentSection.tsx";
 import Tags from "../components/Tags.tsx";
-import Comment from "../types/Comment.ts";
-import {comment1} from "../data/ManualTestData.tsx";
 
 type Props = {
     post: Post;
@@ -24,7 +21,7 @@ type Props = {
 }
 
 export default function PostPage({post, updatePosts, open, onClose}: Props) {
-    const sampleComments: Comment[] = [comment1]
+
     return (
         <Dialog
             open={open}
@@ -90,10 +87,11 @@ export default function PostPage({post, updatePosts, open, onClose}: Props) {
                     {post.body}
                 </Typography>
                 <Reaction post={post} updatePosts={updatePosts}/>
-                <TextField
-                    placeholder="Add a comment"
+                <CommentSection
+                    postId={post.id}
+                    comments={post.comments}
+                    updatePosts={updatePosts}
                 />
-                <CommentSection comments={/*post.comments*/ sampleComments}/>
             </DialogContent>
         </Dialog>
     )

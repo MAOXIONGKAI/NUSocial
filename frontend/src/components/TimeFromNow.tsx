@@ -2,11 +2,13 @@ import {Typography} from "@mui/material";
 import getDuration from "../utils/getDuration.ts";
 
 type Props = {
-    date: Date;
+    date: Date | undefined;
 }
 
 export default function TimeFromNow({date}: Props) {
-    const duration = getDuration(date);
+    const duration = date
+        ? getDuration(date)
+        : "now"
 
     return (
         <>

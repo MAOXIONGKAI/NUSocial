@@ -4,7 +4,7 @@ type Comment = {
     text: string;
     upvotes: string[];
     downvotes: string[];
-    comments: Comment[];
+    comments: number[];
     created_at: Date;
 }
 

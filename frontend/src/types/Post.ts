@@ -1,5 +1,3 @@
-import Comment from "./Comment.ts";
-
 type Post = {
     id: number;
     author: string;
@@ -9,7 +7,7 @@ type Post = {
     body: string;
     upvotes: string[];
     downvotes: string[];
-    comments: Comment[];
+    comments: number[];
     created_at: Date;
 }
 

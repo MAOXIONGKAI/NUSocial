@@ -1,18 +1,21 @@
-import CommentType from "../types/Comment.ts"
 import {Avatar, Box, Card, CardContent, Typography} from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
 import TimeFromNow from "./TimeFromNow.tsx";
+import useComments from "../hooks/useComments.ts";
 
 type Props = {
-    comment: CommentType;
+    id: number;
 }
 
-export default function Comment({comment}: Props) {
+export default function Comment({id}: Props) {
+    const comment = useComments(id)
+
     return (
         <Card sx={{
             display: "flex",
             width: "100%",
-            maxHeight: "40vh",
+            maxHeight: "30vh",
+            overflow: "auto",
             boxShadow: 3,
         }}>
             <CardContent sx={{
@@ -32,9 +35,9 @@ export default function Comment({comment}: Props) {
                         fontSize: "16px",
                         marginRight: "20px"
                     }}>
-                        {comment.author}
+                        {comment?.author}
                     </Typography>
-                    <TimeFromNow date={comment.created_at}/>
+                    <TimeFromNow date={comment?.created_at}/>
                 </Box>
                 <Typography
                     variant="body2"
@@ -44,7 +47,7 @@ export default function Comment({comment}: Props) {
                         fontWeight: 300
                     }}
                 >
-                    {comment.text}
+                    {comment?.text}
                 </Typography>
             </CardContent>
         </Card>

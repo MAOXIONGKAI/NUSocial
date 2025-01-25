@@ -11,6 +11,6 @@ type Comment struct {
 	Text      string         `json:"text"`
 	Upvotes   pq.StringArray `json:"upvotes"`
 	Downvotes pq.StringArray `json:"downvotes"`
-	Comments  []Comment      `json:"comments"`
+	Comments  pq.Int64Array  `json:"comments"`
 	CreatedAt time.Time      `json:"created_at"`
 }
