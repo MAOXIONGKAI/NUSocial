@@ -4,6 +4,7 @@ import axios, {AxiosError, AxiosResponse} from "axios";
 import {UserContext} from "../contexts/UserContext.tsx";
 import useSnackBar from "../hooks/useSnackBar.ts";
 import {successfulCommentCreation} from "../data/SnackBarConfigs.ts";
+import {backendURL} from "../data/Environment.ts";
 
 type Props = {
     postId: number;
@@ -45,7 +46,7 @@ export default function CommentInput({postId, refreshComments, updatePosts}: Pro
         if (!commentObj.text) {
             return
         }
-        axios.post(`http://localhost:8080/api/posts/comments/${postId}`, commentObj)
+        axios.post(`${backendURL}/api/posts/comments/${postId}`, commentObj)
             .then((res: AxiosResponse) => {
                 if (res.data) {
                     setComment("")

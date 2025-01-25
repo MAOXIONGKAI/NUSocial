@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react'
 import axios, {AxiosError, AxiosResponse} from "axios";
+import {backendURL} from "../data/Environment.ts";
 
 export default function useRegisterStatus(username: string): boolean {
     const [isRegistered, setIsRegistered] = useState(false)
@@ -7,7 +8,7 @@ export default function useRegisterStatus(username: string): boolean {
 
     useEffect(() => {
         const timeoutId = setTimeout(() => {
-            axios.get(`http://localhost:8080/api/users/${username}`)
+            axios.get(`${backendURL}/api/users/${username}`)
                 .then((res: AxiosResponse) => setIsRegistered(res.data !== null))
                 .catch((err: AxiosError) => {
                     console.log(err.response?.data)

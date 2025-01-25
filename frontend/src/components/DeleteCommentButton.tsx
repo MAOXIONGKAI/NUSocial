@@ -3,6 +3,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import axios, {AxiosResponse} from "axios";
 import useSnackBar from "../hooks/useSnackBar.ts";
 import {successfulDeleteCommand} from "../data/SnackBarConfigs.ts";
+import {backendURL} from "../data/Environment.ts";
 
 type Props = {
     commentId: number;
@@ -14,7 +15,7 @@ export default function DeleteCommentButton({commentId, updatePosts, refreshComm
     const showDeleteSuccess = useSnackBar(successfulDeleteCommand)
 
     function handleDeleteComment(commentId: number) {
-        axios.delete(`http://localhost:8080/api/comments/${commentId}`)
+        axios.delete(`${backendURL}/api/comments/${commentId}`)
             .then((res: AxiosResponse) => {
                 if (res.status === 200) {
                     updatePosts()
