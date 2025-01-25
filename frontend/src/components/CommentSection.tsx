@@ -62,7 +62,12 @@ export default function CommentSection({postId, comments, updatePosts}: Props) {
                         }}>
                             {comments.map(
                                 comment =>
-                                    <Comment key={comment} id={comment}/>)}
+                                    <Comment
+                                        key={comment}
+                                        id={comment}
+                                        updatePosts={updatePosts}
+                                        refreshComments={refreshComments}
+                                    />)}
                         </Box>
                 }
             </Box>

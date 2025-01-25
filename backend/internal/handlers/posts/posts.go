@@ -4,8 +4,10 @@ import (
 	"backend/internal/models"
 	"database/sql"
 	"github.com/gin-gonic/gin"
+	"github.com/lib/pq"
 	"log"
 	"net/http"
+	"strconv"
 )
 
 type PostActionRequestBody struct {
@@ -115,4 +117,45 @@ func DownvotePost(db *sql.DB, c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{"message": "Downvote toggled"})
+}
+
+func DeletePost(db *sql.DB, c *gin.Context) {
+	postIdStr := c.Param("id")
+	postId, err := strconv.Atoi(postIdStr)
+	if err != nil {
+		c.IndentedJSON(http.StatusBadRequest, gin.H{"error": "Invalid post ID"})
+		return
+	}
+
+	rows, err := db.Query("SELECT unnest(comments) FROM posts WHERE id = $1", postId)
+	if err != nil {
+		c.IndentedJSON(http.StatusInternalServerError, gin.H{"error": "Failed to retrieve comments: " + err.Error()})
+		return
+	}
+	defer rows.Close()
+
+	var commentIds []int64
+	for rows.Next() {
+		var commentId int64
+		if err := rows.Scan(&commentId); err != nil {
+			c.IndentedJSON(http.StatusInternalServerError, gin.H{"error": "Error scanning comment IDs: " + err.Error()})
+			return
+		}
+		commentIds = append(commentIds, commentId)
+	}
+
+	if len(commentIds) > 0 {
+		_, err = db.Exec("DELETE FROM comments WHERE id = ANY($1)", pq.Array(commentIds))
+		if err != nil {
+			c.IndentedJSON(http.StatusInternalServerError, gin.H{"error": "Failed to delete comments: " + err.Error()})
+			return
+		}
+	}
+
+	if _, err := db.Exec("DELETE FROM posts WHERE id = $1", postId); err != nil {
+		c.IndentedJSON(http.StatusInternalServerError, gin.H{"error": "Failed to delete posts: " + err.Error()})
+		return
+	}
+
+	c.IndentedJSON(http.StatusOK, gin.H{"message": "Post deleted"})
 }

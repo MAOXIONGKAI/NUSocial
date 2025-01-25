@@ -29,3 +29,15 @@ export const successfulCommentCreation: SnackBarConfig = {
     severity: "success",
     message: "You have successfully commented under this post"
 }
+
+export const successfulDeletePost: SnackBarConfig = {
+    open: true,
+    severity: "success",
+    message: "You have successfully deleted this post"
+}
+
+export const successfulDeleteCommand: SnackBarConfig = {
+    open: true,
+    severity: "success",
+    message: "You have successfully deleted this command"
+}

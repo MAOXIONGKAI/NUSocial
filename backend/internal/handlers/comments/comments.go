@@ -108,3 +108,23 @@ func CreatePostComment(db *sql.DB, c *gin.Context) {
 	newComment.ID = newCommentId
 	c.IndentedJSON(http.StatusCreated, newComment)
 }
+
+func DeletePostComment(db *sql.DB, c *gin.Context) {
+	commentId := c.Param("id")
+	if commentId == "" {
+		c.IndentedJSON(http.StatusBadRequest, gin.H{"message": "comment not found for deleting"})
+		return
+	}
+
+	_, err := db.Exec("DELETE FROM comments WHERE id = $1", commentId)
+	if err != nil {
+		c.IndentedJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	_, err = db.Exec("UPDATE posts SET comments = array_remove(comments, $1) WHERE $1 = ANY(comments)", commentId)
+	if err != nil {
+		c.IndentedJSON(http.StatusInternalServerError, gin.H{"error": "Failed to remove comment ID from posts: " + err.Error()})
+		return
+	}
+	c.IndentedJSON(http.StatusOK, gin.H{"message": "comment deleted successfully"})
+}
