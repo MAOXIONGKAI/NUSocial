@@ -12,10 +12,10 @@ type DBConfig struct {
 
 func LoadDBConfig() DBConfig {
 	// Load environment variable from .env file only when running locally
-	/*err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}*/
+	//err := godotenv.Load("../.env")
+	//if err != nil {
+	//	log.Fatal("Error loading .env file: " + err.Error())
+	//}
 
 	return DBConfig{
 		User:          os.Getenv("DB_USER"),
