@@ -1,4 +1,4 @@
-import {useContext} from "react";
+import {Dispatch, SetStateAction, useContext} from "react";
 import {UserContext} from "../contexts/UserContext.tsx";
 import {Box, IconButton, Typography} from "@mui/material";
 import UpvoteOffIcon from '@mui/icons-material/ThumbUpOffAlt';
@@ -9,16 +9,29 @@ import downvotePost from "../utils/downvotePost.ts";
 
 type Props = {
     post: Post
-    updatePosts: () => void,
+    upvoted: boolean
+    setUpvoted: Dispatch<SetStateAction<boolean>>
+    downvoted: boolean
+    setDownvoted: Dispatch<SetStateAction<boolean>>
+    upvoteCount: number
+    setUpvoteCount: Dispatch<SetStateAction<number>>
+    setDownvoteCount: Dispatch<SetStateAction<number>>
 }
 
-export default function Upvote({post, updatePosts}: Props) {
+export default function Upvote({
+                                   post,
+                                   upvoted,
+                                   setUpvoted,
+                                   downvoted,
+                                   setDownvoted,
+                                   upvoteCount,
+                                   setUpvoteCount,
+                                   setDownvoteCount
+                               }: Props) {
     const [user,] = useContext(UserContext);
     const loggedIn = user !== null;
+
     const username = user ? user.username : "";
-    const {upvotes, downvotes} = post
-    const upvoted = upvotes.indexOf(username) !== -1
-    const downvoted = downvotes.indexOf(username) !== -1
 
     function handleUpvote() {
         if (!loggedIn) {
@@ -26,9 +39,16 @@ export default function Upvote({post, updatePosts}: Props) {
         }
         if (downvoted) {
             downvotePost(post.id, username)
+            setDownvoteCount(prev => prev - 1)
+            setDownvoted(false)
         }
         upvotePost(post.id, username)
-        updatePosts()
+        setUpvoted(prev => !prev)
+        if (upvoted) {
+            setUpvoteCount(prev => prev - 1)
+        } else {
+            setUpvoteCount(prev => prev + 1)
+        }
     }
 
     return (
@@ -45,7 +65,7 @@ export default function Upvote({post, updatePosts}: Props) {
                     : <UpvoteOffIcon sx={{width: "20px", height: "20px"}}/>
                 }
             </IconButton>
-            <Typography sx={{fontSize: "18px"}}>{upvotes.length}</Typography>
+            <Typography sx={{fontSize: "18px"}}>{upvoteCount}</Typography>
         </Box>
     )
 }
