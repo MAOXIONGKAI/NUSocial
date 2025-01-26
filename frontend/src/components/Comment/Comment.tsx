@@ -66,7 +66,8 @@ export default function Comment({id, updatePosts, refreshComments}: Props) {
                         sx={{
                             color: "gray",
                             fontSize: "16px",
-                            fontWeight: 300
+                            fontWeight: 300,
+                            whiteSpace: "pre-wrap"
                         }}
                     >
                         {comment?.text}
