@@ -13,6 +13,7 @@ type Props = {
     setFilterConditions: (filterConditions: string[]) => void;
     sortCondition: string;
     setSortCondition: (sortCondition: string) => void;
+    setCategoryCondition: (categoryCondition: string) => void;
     updatePosts: () => void;
 }
 
@@ -22,6 +23,7 @@ export default function NavBar({
                                    setFilterConditions,
                                    sortCondition,
                                    setSortCondition,
+                                   setCategoryCondition,
                                    updatePosts
                                }: Props) {
     const [user] = useContext(UserContext)
@@ -38,7 +40,10 @@ export default function NavBar({
                 }}
             >
                 <Box display="flex">
-                    <Logo style={{width: "75px", margin: "0% 7.5% 0% 2.5%"}}/>
+                    <Logo
+                        style={{width: "75px"}}
+                        setCategoryCondition={setCategoryCondition}
+                    />
                     <SearchBar
                         setSearchKeyword={setSearchKeyword}
                         filterConditions={filterConditions}

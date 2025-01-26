@@ -40,6 +40,7 @@ function App() {
                 setFilterConditions={setFilterConditions}
                 sortCondition={sortCondition}
                 setSortCondition={setSortCondition}
+                setCategoryCondition={setCategoryCondition}
                 updatePosts={updatePosts}
             />
             <Box display="flex">

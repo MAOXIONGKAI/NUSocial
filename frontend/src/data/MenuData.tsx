@@ -1,3 +1,4 @@
+import HomeIcon from '@mui/icons-material/Home'
 import StudyIcon from '@mui/icons-material/MenuBook';
 import CCAIcon from '@mui/icons-material/Diversity1';
 import CampusIcon from '@mui/icons-material/LocationCity';
@@ -12,6 +13,7 @@ import UpvoteIcon from '@mui/icons-material/ThumbUp';
 import InteractionIcon from '@mui/icons-material/Insights';
 
 export const categoryMenuOptions = [
+    {text: "Home", Icon: HomeIcon},
     {text: "Study", Icon: StudyIcon},
     {text: "CCA", Icon: CCAIcon},
     {text: "Campus", Icon: CampusIcon},
