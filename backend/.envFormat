@@ -1,0 +1,22 @@
+# This backend service only allows connection to AWS RDS service
+# You will need to set up an AWS RDS PostgreSQL yourself if you want to run this locally
+
+# If you insist on running a local PostgreSQL, simply go into database.go and replace the
+# connectionStr variable with your own connection string
+
+# If using AWS RDS service instead, please remove comment symbol on config.go file line 14 - 18
+# so that the content of your .env file can be read
+# The reason why the lines are commented out is because deployment platform Render does not need
+# these lines, and including them will causing deployment failure due to error in loading env variables
+
+# PostgreSQL username
+DB_USER=
+
+# PostgreSQL database password
+DB_PASSWORD=
+
+# Your amazon web service RDS endpoint string
+AWS_DB_ENDPOINT=
+
+# Frontend base url to set up CORS policy config
+FRONTEND_URL=
