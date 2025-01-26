@@ -74,7 +74,7 @@ export default function LoginFormDialog() {
     return (
         <>
             <Button
-                variant="outlined"
+                variant="contained"
                 sx={{fontSize: "16px"}}
                 onClick={handleOpen}
             >

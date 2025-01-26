@@ -20,5 +20,14 @@ export const appTheme = createTheme({
                 },
             },
         },
+        MuiAlert: {
+            styleOverrides: {
+                root: {
+                    '& .MuiSvgIcon-root': {
+                        color: 'white'
+                    }
+                }
+            }
+        }
     },
 });
