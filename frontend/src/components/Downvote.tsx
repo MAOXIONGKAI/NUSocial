@@ -15,13 +15,14 @@ type Props = {
 
 export default function Downvote({post, updatePosts}: Props) {
     const [user,] = useContext(UserContext)
+    const loggedIn = user !== null
     const username = user ? user.username : ""
     const {upvotes, downvotes} = post
     const upvoted = upvotes.indexOf(username) !== -1
     const downvoted = downvotes.indexOf(username) !== -1
 
     function handleDownvote() {
-        if (user === null) {
+        if (!loggedIn) {
             return
         }
         if (upvoted) {
@@ -36,7 +37,10 @@ export default function Downvote({post, updatePosts}: Props) {
             display: 'flex',
             alignItems: "center",
         }}>
-            <IconButton onClick={handleDownvote}>
+            <IconButton
+                disabled={!loggedIn}
+                onClick={handleDownvote}
+            >
                 {downvoted
                     ? <DownvoteOnIcon sx={{width: "20px", height: "20px"}}/>
                     : <DownvoteOffIcon sx={{width: "20px", height: "20px"}}/>

@@ -14,13 +14,14 @@ type Props = {
 
 export default function Upvote({post, updatePosts}: Props) {
     const [user,] = useContext(UserContext);
+    const loggedIn = user !== null;
     const username = user ? user.username : "";
     const {upvotes, downvotes} = post
     const upvoted = upvotes.indexOf(username) !== -1
     const downvoted = downvotes.indexOf(username) !== -1
 
     function handleUpvote() {
-        if (user === null) {
+        if (!loggedIn) {
             return
         }
         if (downvoted) {
@@ -35,7 +36,10 @@ export default function Upvote({post, updatePosts}: Props) {
             display: 'flex',
             alignItems: "center",
         }}>
-            <IconButton onClick={handleUpvote}>
+            <IconButton
+                disabled={!loggedIn}
+                onClick={handleUpvote}
+            >
                 {upvoted
                     ? <UpvoteOnIcon sx={{width: "20px", height: "20px"}}/>
                     : <UpvoteOffIcon sx={{width: "20px", height: "20px"}}/>

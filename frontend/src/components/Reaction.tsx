@@ -13,11 +13,12 @@ export default function Reaction({post, updatePosts}: Props) {
     return (
         <Box sx={{
             display: "flex",
-            gap: 2
+            gap: 2,
+            marginRight: "10px"
         }}>
-            <Upvote post={post} updatePosts={updatePosts} />
+            <Upvote post={post} updatePosts={updatePosts}/>
             <Downvote post={post} updatePosts={updatePosts}/>
-            <CommentStatus postId={post.id} comments={post.comments} updatePosts={updatePosts}/>
+            <CommentStatus comments={post.comments}/>
         </Box>
     )
 }
