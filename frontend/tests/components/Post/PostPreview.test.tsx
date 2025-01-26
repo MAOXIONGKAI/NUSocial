@@ -1,27 +1,14 @@
 import {render, screen} from '@testing-library/react';
 import PostPreview from "../../../src/components/Post/PostPreview.tsx";
-import Post from "../../../src/types/Post.ts";
-
-const post: Post = {
-    id: 1,
-    author: "MAO XIONGKAI",
-    category: "CCA",
-    tags: ["Discussion", "Question"],
-    title: "This is a test",
-    body: "Is everything working properly",
-    upvotes: [],
-    downvotes: [],
-    comments: [],
-    created_at: new Date()
-}
+import {post1} from "../../sampleData/PostData.ts"
 
 describe('PostPreview', () => {
     it('should render author, title, body and reaction when shown', () => {
-        render(<PostPreview post={post} updatePosts={vi.fn()}/>)
+        render(<PostPreview post={post1} updatePosts={vi.fn()}/>)
 
-        expect(screen.getByText(post.author)).toBeInTheDocument()
-        expect(screen.getByText(post.title)).toBeInTheDocument()
-        expect(screen.getByText(post.body)).toBeInTheDocument()
+        expect(screen.getByText(post1.author)).toBeInTheDocument()
+        expect(screen.getByText(post1.title)).toBeInTheDocument()
+        expect(screen.getByText(post1.body)).toBeInTheDocument()
         expect(screen.getByTestId("ThumbUpOffAltIcon")).toBeInTheDocument()
         expect(screen.getByTestId("ThumbDownOffAltIcon")).toBeInTheDocument()
         expect(screen.getByTestId("QuestionAnswerOutlinedIcon")).toBeInTheDocument()

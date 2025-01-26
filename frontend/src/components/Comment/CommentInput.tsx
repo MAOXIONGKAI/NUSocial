@@ -16,6 +16,7 @@ export default function CommentInput({postId, refreshComments, updatePosts}: Pro
     const [comment, setComment] = useState("");
     const [isFocused, setIsFocused] = useState(false);
     const [user,] = useContext(UserContext);
+    const loggedIn = user !== null
     const showCommentSuccess = useSnackBar(successfulCommentCreation);
 
     const commentObj = {
@@ -24,6 +25,9 @@ export default function CommentInput({postId, refreshComments, updatePosts}: Pro
     }
 
     function handleFocus() {
+        if (!loggedIn) {
+            return
+        }
         setIsFocused(true);
     }
 
