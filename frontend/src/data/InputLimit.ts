@@ -1,1 +1,0 @@
-export const usernameLengthLimit: number = 100;

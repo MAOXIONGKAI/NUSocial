@@ -14,6 +14,7 @@ import TimeFromNow from "../Utils/TimeFromNow.tsx";
 import PostPage from "../ContentSection/pages/PostPage.tsx";
 import DeletePostButton from "./DeletePostButton.tsx";
 import {UserContext} from "../../contexts/UserContext.tsx";
+import truncateText from "../../utils/truncateText.ts";
 
 type Props = {
     post: Post;
@@ -48,9 +49,15 @@ export default function PostPreview({post, updatePosts}: Props) {
                             <Typography sx={{marginRight: "10px"}}>{post.author}</Typography>
                             <TimeFromNow date={post.created_at}/>
                         </Box>
-                        <Typography variant="h6" sx={{fontSize: "20px"}}>{post.title}</Typography>
-                        <Typography variant="body2"
-                                    sx={{color: "gray", fontSize: "16px", fontWeight: 300}}>{post.body}</Typography>
+                        <Typography variant="h6" sx={{fontSize: "20px"}}>
+                            {post.title}
+                        </Typography>
+                        <Typography
+                            variant="body2"
+                            sx={{color: "gray", fontSize: "16px", fontWeight: 300}}
+                        >
+                            {truncateText(post.body)}
+                        </Typography>
                     </CardContent>
                 </CardActionArea>
                 <CardActions sx={{padding: 0}}>
