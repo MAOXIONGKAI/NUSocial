@@ -43,7 +43,7 @@ export default function CommentInput({postId, refreshComments, updatePosts}: Pro
     }
 
     function handleSubmit() {
-        if (!commentObj.text) {
+        if (!commentObj.text || !user) {
             return
         }
         axios.post(`${backendURL}/api/posts/comments/${postId}`, commentObj)
