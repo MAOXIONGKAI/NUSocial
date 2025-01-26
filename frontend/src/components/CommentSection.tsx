@@ -1,8 +1,10 @@
 import NoComment from '../assets/no-comment.png'
 import {Box, Typography} from "@mui/material";
 import Comment from './Comment';
-import {useState} from "react";
+import {useContext, useState} from "react";
 import CommentInput from "./CommentInput.tsx";
+import NoMoreContent from "./NoMoreContent.tsx";
+import {UserContext} from "../contexts/UserContext.tsx";
 
 type Props = {
     postId: number;
@@ -33,7 +35,9 @@ const NoCommentNotice = () => {
 }
 
 export default function CommentSection({postId, comments, updatePosts}: Props) {
+    const [user,] = useContext(UserContext);
     const [, setRefresh] = useState(false);
+    const loggedIn = user !== null
 
     function refreshComments() {
         setRefresh(prev => !prev);
@@ -41,10 +45,11 @@ export default function CommentSection({postId, comments, updatePosts}: Props) {
 
     return (
         <>
-            <CommentInput
+            {loggedIn && <CommentInput
                 postId={postId}
                 refreshComments={refreshComments}
-                updatePosts={updatePosts}/>
+                updatePosts={updatePosts}
+            />}
             <Box sx={{
                 display: "flex",
                 flexDirection: "column",
@@ -68,8 +73,10 @@ export default function CommentSection({postId, comments, updatePosts}: Props) {
                                         updatePosts={updatePosts}
                                         refreshComments={refreshComments}
                                     />)}
+                            <NoMoreContent/>
                         </Box>
                 }
+
             </Box>
         </>
     )
