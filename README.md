@@ -1,4 +1,4 @@
-# Welcome to NUSocial!
+# Welcome to NUSocial! (Project by Mao Xiongkai)
 **NUSocial** is a simple web forum for NUS Students to share different topics about their school lives. Including:
 
 📚 **Study**       (Lesson, tutorial, homework etc.)
