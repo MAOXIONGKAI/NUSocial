@@ -18,7 +18,7 @@ import {loginFormDefaultData} from "../../../data/DefaultFormData.ts";
 import hasEmptyField from "../../../utils/hasEmptyField.ts";
 import useSnackBar from "../../../hooks/useSnackBar.ts";
 import {successfulLogin} from "../../../data/SnackBarConfigs.ts";
-import {usernameLengthLimit} from "../../../data/InputLimit.ts";
+import {usernameLengthLimit} from "../../../data/textLengthLimit.ts";
 import {backendURL} from "../../../data/Config.ts";
 
 export default function LoginFormDialog() {

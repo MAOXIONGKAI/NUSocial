@@ -18,7 +18,7 @@ import hasEmptyField from "../../../utils/hasEmptyField.ts";
 import useSnackBar from "../../../hooks/useSnackBar.ts";
 import {successfulSignUp} from "../../../data/SnackBarConfigs.ts";
 import {UserContext} from "../../../contexts/UserContext.tsx";
-import {usernameLengthLimit} from "../../../data/InputLimit.ts";
+import {usernameLengthLimit} from "../../../data/textLengthLimit.ts";
 import {backendURL} from "../../../data/Config.ts";
 
 export default function SignUpFormDialog() {
