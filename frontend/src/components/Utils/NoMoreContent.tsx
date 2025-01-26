@@ -8,7 +8,8 @@ export default function NoMoreContent() {
             flexDirection: "column",
             alignItems: "center",
             textAlign: "center",
-            gap: 2
+            gap: 2,
+            marginBottom: "20px"
         }}>
             <img
                 src={FinishImage}
