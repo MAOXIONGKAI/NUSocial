@@ -1,4 +1,4 @@
-import {useContext} from "react";
+import {Dispatch, SetStateAction, useContext} from "react";
 import {UserContext} from "../contexts/UserContext.tsx";
 import {Box, IconButton, Typography} from "@mui/material";
 import DownvoteOffIcon from '@mui/icons-material/ThumbDownOffAlt';
@@ -10,25 +10,45 @@ import upvotePost from "../utils/upvotePost.ts";
 
 type Props = {
     post: Post
-    updatePosts: () => void;
+    upvoted: boolean
+    setUpvoted: Dispatch<SetStateAction<boolean>>
+    downvoted: boolean
+    setDownvoted: Dispatch<SetStateAction<boolean>>
+    downvoteCount: number
+    setUpvoteCount: Dispatch<SetStateAction<number>>
+    setDownvoteCount: Dispatch<SetStateAction<number>>
 }
 
-export default function Downvote({post, updatePosts}: Props) {
+export default function Downvote({
+                                     post,
+                                     upvoted,
+                                     setUpvoted,
+                                     downvoted,
+                                     setDownvoted,
+                                     downvoteCount,
+                                     setUpvoteCount,
+                                     setDownvoteCount
+                                 }: Props) {
     const [user,] = useContext(UserContext)
+    const loggedIn = user !== null
     const username = user ? user.username : ""
-    const {upvotes, downvotes} = post
-    const upvoted = upvotes.indexOf(username) !== -1
-    const downvoted = downvotes.indexOf(username) !== -1
 
     function handleDownvote() {
-        if (user === null) {
+        if (!loggedIn) {
             return
         }
         if (upvoted) {
             upvotePost(post.id, username)
+            setUpvoteCount(prev => prev - 1)
+            setUpvoted(false)
         }
         downvotePost(post.id, username)
-        updatePosts()
+        setDownvoted(prev => !prev)
+        if (downvoted) {
+            setDownvoteCount(prev => prev - 1)
+        } else {
+            setDownvoteCount(prev => prev + 1)
+        }
     }
 
     return (
@@ -36,13 +56,16 @@ export default function Downvote({post, updatePosts}: Props) {
             display: 'flex',
             alignItems: "center",
         }}>
-            <IconButton onClick={handleDownvote}>
+            <IconButton
+                disabled={!loggedIn}
+                onClick={handleDownvote}
+            >
                 {downvoted
                     ? <DownvoteOnIcon sx={{width: "20px", height: "20px"}}/>
                     : <DownvoteOffIcon sx={{width: "20px", height: "20px"}}/>
                 }
             </IconButton>
-            <Typography sx={{fontSize: "18px"}}>{downvotes.length}</Typography>
+            <Typography sx={{fontSize: "18px"}}>{downvoteCount}</Typography>
         </Box>
     )
 }

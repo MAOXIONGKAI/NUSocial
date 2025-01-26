@@ -56,12 +56,13 @@ export default function PostPreview({post, updatePosts}: Props) {
                 <CardActions sx={{padding: 0}}>
                     <Reaction
                         post={post}
-                        updatePosts={updatePosts}
                     />
-                    {isOwnPost && <DeletePostButton
-                        postId={post.id}
-                        updatePosts={updatePosts}
-                    />}
+                    {isOwnPost && (
+                        <DeletePostButton
+                            postId={post.id}
+                            updatePosts={updatePosts}
+                        />
+                    )}
                 </CardActions>
             </Card>
         </>

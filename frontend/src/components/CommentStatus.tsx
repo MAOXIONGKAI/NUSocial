@@ -1,26 +1,18 @@
-import {Box, IconButton, Typography} from "@mui/material";
+import {Box, Typography} from "@mui/material";
 import CommentIcon from '@mui/icons-material/QuestionAnswerOutlined';
 
 type Props = {
-    postId: number;
     comments: number[]
-    updatePosts: () => void;
 }
 
-export default function CommentStatus({postId, comments, updatePosts}: Props) {
-    function handleComment() {
-        console.log("Open comment section of post with ID: " + postId);
-        updatePosts()
-    }
+export default function CommentStatus({comments}: Props) {
 
     return (
         <Box sx={{
             display: 'flex',
             alignItems: "center"
         }}>
-            <IconButton onClick={handleComment}>
-                <CommentIcon sx={{width: "20px", height: "20px"}}/>
-            </IconButton>
+            <CommentIcon sx={{width: "20px", height: "20px", padding: "8px"}}/>
             <Typography sx={{fontSize: "18px"}}>{comments.length}</Typography>
         </Box>
     )
