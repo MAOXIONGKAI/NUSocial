@@ -1,9 +1,9 @@
 import {useState} from 'react'
 import './App.css'
-import NavBar from './components/NavBar'
-import SideBar from "./components/SideBar.tsx";
+import NavBar from './components/NavBar/NavBar.tsx'
+import SideBar from "./components/SideBar/SideBar.tsx";
 import {Box} from "@mui/material"
-import ContentSection from "./components/ContentSection.tsx";
+import ContentSection from "./components/ContentSection/ContentSection.tsx";
 import usePosts from "./hooks/usePosts.ts";
 import Post from "./types/Post.ts";
 import implementSort from "./utils/implementSort.ts";

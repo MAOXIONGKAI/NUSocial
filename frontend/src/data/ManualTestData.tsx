@@ -37,8 +37,5 @@ export const comment1: Comment = {
     id: 1,
     author: "MAO XIONGKAI",
     text: "This is a sample comment",
-    upvotes: [],
-    downvotes: [],
-    comments: [],
     created_at: new Date("2025-01-23 18:00")
 }
