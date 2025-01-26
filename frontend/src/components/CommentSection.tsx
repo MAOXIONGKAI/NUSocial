@@ -3,6 +3,7 @@ import {Box, Typography} from "@mui/material";
 import Comment from './Comment';
 import {useState} from "react";
 import CommentInput from "./CommentInput.tsx";
+import NoMoreContent from "./NoMoreContent.tsx";
 
 type Props = {
     postId: number;
@@ -68,8 +69,10 @@ export default function CommentSection({postId, comments, updatePosts}: Props) {
                                         updatePosts={updatePosts}
                                         refreshComments={refreshComments}
                                     />)}
+                            <NoMoreContent/>
                         </Box>
                 }
+
             </Box>
         </>
     )
