@@ -9,7 +9,7 @@ const layout: IconMenuItemLayout = {
 }
 describe('IconMenuItem', () => {
     it('should render the icon with the correct text', () => {
-        render(<IconMenuItem layout={layout} setSelectedOption={vi.fn()}/>)
+        render(<IconMenuItem layout={layout} selectedOption="" setSelectedOption={vi.fn()}/>)
 
         expect(screen.getByRole("menuitem")).toHaveTextContent("Hello")
         expect(screen.getByTestId("WavingHandIcon")).toBeInTheDocument()
