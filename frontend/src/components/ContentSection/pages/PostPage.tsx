@@ -89,7 +89,8 @@ export default function PostPage({post, updatePosts, open, onClose}: Props) {
                     sx={{
                         color: "gray",
                         fontSize: "16px",
-                        fontWeight: 300
+                        fontWeight: 300,
+                        whiteSpace: "pre-wrap"
                     }}>
                     {post.body}
                 </Typography>

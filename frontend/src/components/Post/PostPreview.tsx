@@ -54,7 +54,7 @@ export default function PostPreview({post, updatePosts}: Props) {
                         </Typography>
                         <Typography
                             variant="body2"
-                            sx={{color: "gray", fontSize: "16px", fontWeight: 300}}
+                            sx={{color: "gray", fontSize: "16px", fontWeight: 300, whiteSpace: "pre-wrap"}}
                         >
                             {truncateText(post.body)}
                         </Typography>
