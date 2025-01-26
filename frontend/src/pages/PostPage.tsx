@@ -12,6 +12,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import Reaction from "../components/Reaction.tsx";
 import CommentSection from "../components/CommentSection.tsx";
 import Tags from "../components/Tags.tsx";
+import Category from "../components/Category.tsx"
 
 type Props = {
     post: Post;
@@ -58,7 +59,13 @@ export default function PostPage({post, updatePosts, open, onClose}: Props) {
                         <CloseIcon/>
                     </IconButton>
                 </Box>
-                <Tags tags={post.tags}/>
+                <Box sx={{
+                    display: "flex",
+                    gap: 2
+                }}>
+                    <Category text={post.category}/>
+                    <Tags tags={post.tags}/>
+                </Box>
             </DialogTitle>
             <DialogContent
                 sx={{
@@ -86,7 +93,7 @@ export default function PostPage({post, updatePosts, open, onClose}: Props) {
                     }}>
                     {post.body}
                 </Typography>
-                <Reaction post={post} updatePosts={updatePosts}/>
+                <Reaction post={post}/>
                 <CommentSection
                     postId={post.id}
                     comments={post.comments}

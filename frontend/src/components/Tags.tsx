@@ -18,8 +18,9 @@ export default function Tags({tags}: Props) {
                             display: "inline-block",
                             padding: "5px 10px",
                             borderRadius: "50px",
-                            backgroundColor: "black",
-                            color: "white",
+                            backgroundColor: "white",
+                            color: "#1976d2",
+                            border: "1px solid #1976d2",
                             fontSize: "10px"
                         }}
                     >
