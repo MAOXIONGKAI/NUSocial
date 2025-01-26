@@ -5,6 +5,7 @@ import useComments from "../../hooks/useComments.ts";
 import DeleteCommentButton from "./DeleteCommentButton.tsx";
 import {useContext} from "react";
 import {UserContext} from "../../contexts/UserContext.tsx";
+import AuthorTag from "../Tags/AuthorTag.tsx";
 
 type Props = {
     id: number;
@@ -41,10 +42,10 @@ export default function Comment({id, updatePosts, refreshComments}: Props) {
                     </Avatar>
                     <Typography variant="h2" sx={{
                         fontSize: "16px",
-                        marginRight: "20px"
                     }}>
                         {comment?.author}
                     </Typography>
+                    {isOwnComment && <AuthorTag/>}
                     <TimeFromNow date={comment?.created_at}/>
                     {isOwnComment && <Box sx={{marginLeft: "auto"}}>
                         <DeleteCommentButton
