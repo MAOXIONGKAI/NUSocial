@@ -96,7 +96,7 @@ export default function PostPage({post, updatePosts, open, onClose}: Props) {
                 </Typography>
                 <Reaction post={post}/>
                 <CommentSection
-                    postId={post.id}
+                    post={post}
                     comments={post.comments}
                     updatePosts={updatePosts}
                 />

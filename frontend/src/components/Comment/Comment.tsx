@@ -6,17 +6,20 @@ import DeleteCommentButton from "./DeleteCommentButton.tsx";
 import {useContext} from "react";
 import {UserContext} from "../../contexts/UserContext.tsx";
 import AuthorTag from "../Tags/AuthorTag.tsx";
+import Post from "../../types/Post.ts";
 
 type Props = {
     id: number;
+    post: Post;
     updatePosts: () => void;
     refreshComments: () => void;
 }
 
-export default function Comment({id, updatePosts, refreshComments}: Props) {
-    const comment = useComments(id)
+export default function Comment({id, post, updatePosts, refreshComments}: Props) {
+    const comment = useComments(id);
     const [user,] = useContext(UserContext);
-    const isOwnComment = user?.username === comment?.author
+    const isAuthor = user?.username === post.author;
+    const isOwnComment = user?.username === comment?.author;
 
     return (
         <Card sx={{
@@ -45,7 +48,7 @@ export default function Comment({id, updatePosts, refreshComments}: Props) {
                     }}>
                         {comment?.author}
                     </Typography>
-                    {isOwnComment && <AuthorTag/>}
+                    {isAuthor && <AuthorTag/>}
                     <TimeFromNow date={comment?.created_at}/>
                     {isOwnComment && <Box sx={{marginLeft: "auto"}}>
                         <DeleteCommentButton

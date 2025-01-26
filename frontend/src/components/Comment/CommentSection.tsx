@@ -5,9 +5,10 @@ import {useContext, useState} from "react";
 import CommentInput from "./CommentInput.tsx";
 import NoMoreContent from "../Utils/NoMoreContent.tsx";
 import {UserContext} from "../../contexts/UserContext.tsx";
+import Post from "../../types/Post.ts";
 
 type Props = {
-    postId: number;
+    post: Post;
     comments: number[];
     updatePosts: () => void;
 }
@@ -34,10 +35,11 @@ const NoCommentNotice = () => {
     )
 }
 
-export default function CommentSection({postId, comments, updatePosts}: Props) {
+export default function CommentSection({post, comments, updatePosts}: Props) {
     const [user,] = useContext(UserContext);
     const [, setRefresh] = useState(false);
-    const loggedIn = user !== null
+    const loggedIn = user !== null;
+    const postId = post.id;
 
     function refreshComments() {
         setRefresh(prev => !prev);
@@ -70,6 +72,7 @@ export default function CommentSection({postId, comments, updatePosts}: Props) {
                                     <Comment
                                         key={comment}
                                         id={comment}
+                                        post={post}
                                         updatePosts={updatePosts}
                                         refreshComments={refreshComments}
                                     />)}
